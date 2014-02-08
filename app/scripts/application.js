@@ -1,23 +1,31 @@
 define([
 	'backbone',
 	'communicator',
-	'hbs!tmpl/welcome'
+	'models/user-model',
+	'models/order-model',
+	'views/user-view',
+	'views/order-status-view',
+	'jquery-ui',
+	'jquery-ui-touch-punch'
 ],
 
-function( Backbone, Communicator, Welcome_tmpl ) {
+function( Backbone, Communicator, userModel, orderModel, userView, orderStatusView ) {
     'use strict';
-
-	var welcomeTmpl = Welcome_tmpl;
 
 	var App = new Backbone.Marionette.Application();
 
 	/* Add application regions here */
-	App.addRegions({});
+	App.addRegions({
+		user: '#user',
+		orderStatus: '#order-status'
+	});
 
 	/* Add initializers here */
 	App.addInitializer( function () {
-		document.body.innerHTML = welcomeTmpl({ success: "CONGRATS!" });
-		Communicator.mediator.trigger("APP:START");
+		App.user.show( new userView({ model: userModel }) );
+		App.orderStatus.show( new orderStatusView({ model: orderModel }) );
+
+
 	});
 
 	return App;

@@ -3,7 +3,7 @@ require.config({
     baseUrl: "/scripts",
 
     /* starting point for application */
-    deps: ['backbone.marionette', 'bootstrap', 'main'],
+    deps: ['backbone.marionette', 'main'],
 
 
     shim: {
@@ -30,8 +30,8 @@ require.config({
         'backbone.wreqr': '../bower_components/backbone.wreqr/lib/amd/backbone.wreqr',
         'backbone.babysitter': '../bower_components/backbone.babysitter/lib/amd/backbone.babysitter',
 
-        /* alias the bootstrap js lib */
-        bootstrap: 'vendor/bootstrap',
+        'jquery-ui': '../bower_components/jquery-ui/ui/minified/jquery-ui.min',
+        'jquery-ui-touch-punch': '../bower_components/jquery-ui-touch-punch/jquery.ui.touch-punch.min',
 
         /* Alias text.js for template loading and shortcut the templates dir to tmpl */
         text: '../bower_components/requirejs-text/text',
