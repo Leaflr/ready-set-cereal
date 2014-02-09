@@ -97,30 +97,54 @@ define([
 		},
 
 		initCerealSliders: function(){
-			var indicator, handle, value, cereal, self = this;
+			var indicator, handle, value, cereal, cerealAmount = 'None', self = this;
 
 			function indicatorWidth( indicator, offset ){
 				indicator.width( offset + 50 )
 			}
 
-			this.$el.find('.cereal').slider({
+			function amountCheck(){
+				var amount = data.c1 + data.c2 + data.c3;
+
+				if ( amount == 2 ){
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			this.$el.find('.cereal').on('mousedown', function(e){
+				
+				
+			}).slider({
 				min: 0,
 				max: 2,
 				create: function( event, ui ){
-					value = $(this).find('.amount');
-
-					value.text( ui.value )
+				
 				},
 				start: function( event, ui ){
+					value = $(this).find('.amount');
 					cereal = $(this).attr('data-cereal');
 					indicator = $(this).find('.amount-indicator');
-					handle = $(this).find('.ui-slider-handle img');
-					indicatorWidth( indicator, handle.offset().left )
+					handle = $(this).find('.ui-slider-handle');
+					indicatorWidth( indicator, handle.offset().left );
+					
 				},
 				slide: function( event, ui ){
-					indicatorWidth( indicator, handle.offset().left + 17 )
-					value.text( ui.value )
+					indicatorWidth( indicator, handle.offset().left + 17 );
+					if ( amountCheck() === false ){
+						handle.removeAttr('style')
+						handle.css('left','0')
+					} else {
+						$(this).css('pointer-events','none')
 
+					}
+					if ( ui.value == 1 )
+						cerealAmount = 'Half a bowl';
+					else if ( ui.value == 2 )
+						cerealAmount = 'Full bowl';
+
+					value.text( cerealAmount );
 				},
 				stop: function( event, ui ){
 					indicatorWidth( indicator, handle.offset().left )

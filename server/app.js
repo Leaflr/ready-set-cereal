@@ -73,7 +73,6 @@ app.get('/machine', function(req, res){
 
 // get ranks
 app.get('/ranks/:id', function( req, res ){
-	connection.connect();
 
 	var query;
 
@@ -87,78 +86,77 @@ app.get('/ranks/:id', function( req, res ){
 		res.send( results )
 	});
 
-	connection.end();
 });
 
 // check machine status/info
 app.get('/status', function( req, res ){
-	connection.connect();
-
-	connection.query('SELECT * FROM status', function( err, results ){
+	connection.query('SELECT * FROM current-status', function( err, results ){
 		console.log('error', err);
 		res.send( results )
 	});
-
-	connection.end();
 });
 
 // gets all orders if no id is specified
 app.get('/orders/:id', function( req, res ){
-	connection.connect();
 
 	var query;
 
 	if ( req.params.id )
-		query = 'SELECT * FROM orders WHERE id=' + connection.escape(req.params.id);
+		query = 'SELECT * FROM pending-orders WHERE id=' + connection.escape(req.params.id);
 	else
-		query = 'SELECT * FROM orders';
+		query = 'SELECT * FROM pending-orders';
 
 	connection.query(query, function( err, results ){
 		console.log('error', err);
 		res.send( results )
 	});
 
-	connection.end();
+});
+
+// gets all orders if no id is specified
+app.get('/completed_orders/:id', function( req, res ){
+
+	var query;
+
+	if ( req.params.id )
+		query = 'SELECT * FROM completed-orders WHERE id=' + connection.escape(req.params.id);
+	else
+		query = 'SELECT * FROM completed-orders';
+
+	connection.query(query, function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
+
 });
 
 // get user info
 app.get('/user/:id', function( req, res ){
-	connection.connect();
-
 	connection.query('SELECT * FROM users WHERE id=' + connection.escape(req.params.id), function( err, results ){
 		console.log('error', err);
 		res.send( results )
 	});
-
-	connection.end();
 });
 
 // a new order is entered
 app.post('/new_order', function( req, res ){
-	// connection.connect();
-	console.log(req.body)
 	connection.query('INSERT INTO pending-orders SET ?', req.body, function(err, result) {
   		
 	});
-
-	// connection.end();
 });
 
 // skips to next order if there is a wait
 app.post('/skip_order', function( req, res ){
-
+	connection.query('DELETE FROM pending-orders WHERE timestamp IS NOT NULL order by timestamp desc LIMIT 1', function( err, results ){
+		
+	});
 });
 
 // user cancels their order
 app.post('/cancel_order/:id', function( req, res ){
-	connection.connect();
-
-	connection.query('SELECT * FROM pending-orders WHERE id=' + connection.escape(req.params.id), function( err, results ){
-		console.log('error', err);
-		res.send( results )
+	connection.query('DELETE * FROM pending-orders WHERE id=' + connection.escape(req.params.id), function( err, results ){
+		
 	});
-
-	connection.end();
 });
 
 

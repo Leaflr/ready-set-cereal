@@ -11,20 +11,20 @@
 	top: 50px;
 	height: 100px;
 	width: 100%;
-	background-color: #ccc;
+	background-color: $primary-2;
 }
 
 .sliders-wrapper {
 	padding: 10px;
 	padding-top: 100px;
-	text-align: center;
+	// text-align: center;
 
 	> div {
 		text-align: center;
 	}
 
 	h3 {
-		text-align: center;
+		// text-align: center;
 	}
 
 	.slider, .amount-indicator {
@@ -48,8 +48,8 @@
 
 	.amount {
 		position: absolute;
-		width: 100%;
-		text-align: center;
+		top: -33px;
+		right: $horiz-pad;
 	}
 
 	.ui-slider-handle {
