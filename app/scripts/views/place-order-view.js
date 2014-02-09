@@ -243,7 +243,15 @@ define([
 		},
 
 		submitOrder: function(){
-			
+			for ( var keys in data ){
+				if ( keys == 'c1' || keys == 'c2' || keys == 'c3' ){
+					if (data[keys] == 1)
+						data[keys] == 50
+					else if (data[keys] == 2)
+						data[keys] == 100
+				}
+			}
+
 			$.ajax({
 				url: '/new_order',
 				type: 'POST',
