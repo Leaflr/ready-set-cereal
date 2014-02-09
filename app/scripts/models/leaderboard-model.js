@@ -6,7 +6,6 @@ define([
 
 	return Backbone.Model.extend({
 		initialize: function(){
-			
 		}
 	});
 });

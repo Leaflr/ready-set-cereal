@@ -17,8 +17,9 @@
 
 .cereal-bowl {
 	position: fixed;
-	// z-index: 90;
+	z-index: 90;
 	top: 50px;
+	margin-left: -$horiz-pad;
 	height: 150px;
 	width: 100%;
 	background-color: $primary-2;

@@ -91,18 +91,18 @@ define([
 
 					var top = -(ui.value * 8),
 						width = 7.25 * ui.value,
-						sizeAdjust = 113;
+						sizeAdjust = 120;
 
 					milk.css({
 						'margin-top': 106 + top + 'px',
-						'margin-left': 48 - (width/1.84) + 'px',
+						'margin-left': 43 - (width/1.84) + 'px',
 						'width': sizeAdjust + width + 'px',
 						'height': sizeAdjust + width + 'px',
 					});
 
 					milkFill.css({
-						'margin-top': (200 + top) * .7 + 'px',
-						'height': 5 * ui.value + 'px'
+						'margin-top': (204 + top) * .7 + 'px',
+						'height': 6 * ui.value + 'px'
 					});
 
 					oz.text( ui.value )
@@ -248,7 +248,9 @@ define([
 				url: '/new_order',
 				type: 'POST',
 				data: data
-			})
+			}).success(function(){
+
+			});
 		}
 
 	});

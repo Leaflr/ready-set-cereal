@@ -20,19 +20,27 @@
 		width: 85%;
 		min-height: calc(100% - $nav-height);
 		right: -85%;
-		background-color: #333;
+		background-color: $primary-2;
 		padding: 20px;
 		height: 100%;
 	}
 }
 
 .nav-content {
-	
+	.user-info, .status, .experience {
+		border-radius: $border-radius;
+		border: $border;
+		background-color: white;
+		padding: 10px;
+	}
 
 	.user-info {
+		margin-bottom: 15px;
+
 		p {
 			margin: 3px 0;
 		}
+
 		.rank-info {
 			text-align: center;
 
@@ -44,6 +52,35 @@
 				border-radius: 50%;
 				background-color: tomato;
 			}
+		}
+	}
+
+	.experience {
+		margin-bottom: 15px;
+
+		.bar {
+			height: 16px;
+			border-radius: 8px;
+
+			width: 100%;
+			position: relative;
+
+			.bar-value {
+				position: absolute;
+				background-color: #00ff95;
+				width: 20%;
+				height: 16px;
+				border-radius: 8px
+			}
+		}
+
+		.level, .next-level {
+			display: block;
+			font-family: 'dinprobold';
+			margin-top: 6px;
+		}
+		.next-level {
+			float: right;
 		}
 	}
 	ul.nav {

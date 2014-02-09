@@ -66,30 +66,47 @@ button {
 	position: relative;
 	left: 0;
 	overflow: none;
+	padding: $horiz-pad;
 }
 
 #leaderboard {
+	position: relative;
+
+	.logo {
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		outline: 1px solid;
+		top: 20px;
+		right: 20px;
+	}
 
 	ul {
-		border-radius: 15px;
+		border-radius: $border-radius;
 		margin: 0;
 		padding: 20px;
 		background-color: white;
-		border: 3px solid #dedede;
+		border: $border;
+		list-style: none;
+
 
 		li {
 			border-bottom: 2px solid #dedede;
 			padding: 8px 0;
 			color: $primary-color;
+			font-size: 18px;
+    		font-family: 'dinprobold';
 			
 			span {
 				color: #dedede;
 			}
 
 			&:first-child {
-				border-bottom-color: $primary-color;
+				border-bottom: 2px solid $primary-color;
 				margin-bottom: 8px;
 				text-transform: uppercase;
+				font-size: 21px;
+    			font-family: 'dinproblack';
 			}
 
 			&:last-child {

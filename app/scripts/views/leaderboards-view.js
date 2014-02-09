@@ -9,7 +9,11 @@ define([
 	return Backbone.Marionette.CompositeView.extend({
 		template: leaderboardsTemp,
 		itemView: leaderboardView,
-		tagName: 'ul'
+		tagName: 'ul',
+
+		onRender: function(){
+			this.$el.prepend('<li>cereal masters</li>');
+		}
 
 
 	});

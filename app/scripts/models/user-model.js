@@ -5,6 +5,7 @@ define([
 	'use strict';
 
 	var UserModel = Backbone.Model.extend({
+		// url: '/user'
 		initialize: function(){
 			function supportsLocalCheck() {
 			  try {
@@ -28,16 +29,18 @@ define([
 					userEntry = {
 						rank: 1,
 						activeOrder: '',
-						orders: ''
+						orders: '',
 					}
 
 					this.set(userEntry);
-					
+					this.save(userEntry);
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
 				}
 			} else {
 				console.log('nooope');
 			}
+
+			this.set('next-rank', this.get('rank') + 1);
 		}
 	});
 

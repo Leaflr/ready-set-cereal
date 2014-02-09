@@ -15,6 +15,10 @@ var connection = mysql.createConnection('mysql://rsc:g00dbyeworld!@leaflr.com/rs
 // init express
 var app = express();
 
+var server = http.createServer(app);
+
+var io = socketIO.listen(server);
+
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
     app.use(express.bodyParser());
@@ -52,9 +56,9 @@ connection.connect(function(err) {
 // });
 
 // create ranks table
-connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
-	console.log('error', err, 'results', results);
-});
+// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
+// 	console.log('error', err, 'results', results);
+// });
 
 // connection.end();
 
@@ -89,6 +93,18 @@ app.get('/ranks/:id', function( req, res ){
 });
 
 // check machine status/info
+var interval;
+
+interval = setInterval(function(){
+	// connection.query('SELECT * FROM current-status', function( err, results ){
+	// 	console.log('error', err);
+ //    	io.sockets.emit('status', results);
+	// });
+	var test = 'test'
+    	io.sockets.emit('status', test);
+
+}, 3000);
+
 app.get('/status', function( req, res ){
 	connection.query('SELECT * FROM current-status', function( err, results ){
 		console.log('error', err);
@@ -170,7 +186,7 @@ app.post('/cancel_order/:id', function( req, res ){
 
 
 // start server
-http.createServer(app).listen(3000, function(){
+server.listen(9000, function(){
     console.log('Express App started!');
 });
 
