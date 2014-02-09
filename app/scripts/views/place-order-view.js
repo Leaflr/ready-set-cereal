@@ -8,6 +8,7 @@ define([
 	'use strict';
 
 	var data = { 
+		order_id: 0,
 		spoon: 1,
 		milk: 0,
 		c1: 0,
