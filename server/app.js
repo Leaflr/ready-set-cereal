@@ -171,21 +171,21 @@ app.post('/new_user', function( req, res ){
 
 // a new order is entered
 app.post('/new_order', function( req, res ){
-	connection.query('INSERT INTO \'pending-orders\' VALUES ('+connection.escape(req.body)+')', function(err, result) {
+	connection.query('INSERT INTO pending_orders VALUES ? ', req.body, function(err, result) {
   		console.log(err, result)
 	});
 });
 
 // skips to next order if there is a wait
 app.post('/skip_order', function( req, res ){
-	connection.query('DELETE FROM pending-orders WHERE timestamp IS NOT NULL order by timestamp desc LIMIT 1', function( err, results ){
+	connection.query('DELETE FROM pending_orders WHERE timestamp IS NOT NULL order by timestamp desc LIMIT 1', function( err, results ){
 		
 	});
 });
 
 // user cancels their order
 app.post('/cancel_order/:id', function( req, res ){
-	connection.query('DELETE * FROM pending-orders WHERE id=' + connection.escape(req.params.id), function( err, results ){
+	connection.query('DELETE * FROM pending_orders WHERE id=' + connection.escape(req.params.id), function( err, results ){
 		
 	});
 });
