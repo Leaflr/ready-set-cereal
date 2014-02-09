@@ -48,7 +48,7 @@ define([
 
 			if ( supportsLocal === true ){
 				// if ( user ) {
-					// delete localStorage['user']
+					delete localStorage['user']
 					var self = this;
 					userEntry = JSON.parse(user);
 					this.url = '/user/' + userEntry.insertId;
@@ -77,10 +77,10 @@ define([
 
 					this.save(userEntry, {
 						success:function(data){
-							userEntry.insertId = self.get('insertId');
+							
 						} 
 					})
-
+					userEntry.insertId = self.get('insertId');
 					
 
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
