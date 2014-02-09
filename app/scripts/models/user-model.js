@@ -47,12 +47,12 @@ define([
 				userEntry;
 
 			if ( supportsLocal === true ){
-				if ( user ) {
-					// delete localStorage['user']
-					userEntry = JSON.parse(user);
+				// if ( user ) {
+				// 	delete localStorage['user']
+				// 	userEntry = JSON.parse(user);
 					
-					this.set(userEntry)
-				} else {
+				// 	this.set(userEntry)
+				// } else {
 					userEntry = {
 						rank: 1,
 						activeOrder: '',
@@ -67,7 +67,7 @@ define([
 					});
 
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
-				}
+				// }
 			} else {
 				console.log('nooope');
 			}
