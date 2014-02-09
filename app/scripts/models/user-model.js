@@ -81,7 +81,7 @@ define([
 						} 
 					})
 					userEntry.insertId = self.get('insertId');
-					
+					console.log(userEntry)
 
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
 				// }
