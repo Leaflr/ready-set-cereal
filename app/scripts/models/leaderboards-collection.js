@@ -9,7 +9,7 @@ define([
 		url: '/users',
 		model: leaderboardModel,
 		initialize: function(){
-			// this.fetch();
+			this.fetch();
 		}
 	});
 
