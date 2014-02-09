@@ -162,7 +162,7 @@ app.post('/cancel_order/:id', function( req, res ){
 
 
 // start server
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(3000, function(){
     console.log('Express App started!');
 });
 
