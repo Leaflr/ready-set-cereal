@@ -77,13 +77,14 @@ define([
 
 					this.save(userEntry, {
 						success:function(data){
-							
+							userEntry.insertId = self.get('insertId');
+							localStorage.setItem('user', JSON.stringify( userEntry ) );
 						} 
 					})
-					userEntry.insertId = self.get('insertId');
+					
 					console.log(userEntry)
 
-					localStorage.setItem('user', JSON.stringify( userEntry ) );
+					
 				// }
 
 				
