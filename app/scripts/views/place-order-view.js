@@ -248,8 +248,8 @@ define([
 				url: '/new_order',
 				type: 'POST',
 				data: data
-			}).success(function(){
-
+			}).success(function(data){
+				console.log(data)
 			});
 		}
 
