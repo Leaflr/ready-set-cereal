@@ -11,7 +11,8 @@ define([
 		milk: 0,
 		c1: 0,
 		c2: 0,
-		c3: 0
+		c3: 0,
+		status: 'pending'
 	};
 
 	var nutritionalInfo = {
@@ -64,7 +65,9 @@ define([
 		},
 
 		initMilkSlider: function(){
-			var indicator, handle, oz, cups, self = this;
+			var indicator, handle, oz, cups, self = this, 
+			milk = this.$el.find('.cereal-bowl .milk'),
+			milkFill = this.$el.find('.cereal-bowl .milk-fill');
 
 			function indicatorWidth( indicator, offset ){
 				indicator.width( offset + 50 )
@@ -84,8 +87,24 @@ define([
 					indicatorWidth( indicator, handle.offset().left )
 				},
 				slide: function( event, ui ){
-					indicatorWidth( indicator, handle.offset().left + 17 )
-					
+					indicatorWidth( indicator, handle.offset().left + 17 );
+
+					var top = -(ui.value * 8),
+						width = 7.25 * ui.value,
+						sizeAdjust = 113;
+
+					milk.css({
+						'margin-top': 106 + top + 'px',
+						'margin-left': 48 - (width/1.84) + 'px',
+						'width': sizeAdjust + width + 'px',
+						'height': sizeAdjust + width + 'px',
+					});
+
+					milkFill.css({
+						'margin-top': (200 + top) * .7 + 'px',
+						'height': 5 * ui.value + 'px'
+					});
+
 					oz.text( ui.value )
 					cups.text( ui.value * .125 )
 				},
@@ -97,7 +116,11 @@ define([
 		},
 
 		initCerealSliders: function(){
-			var indicator, handle, value, cereal, cerealAmount = 'None', self = this;
+			var indicator, handle, value, cereal, 
+				cerealAmount = 'None', 
+				self = this,
+				cereal1 = this.$el.find('.cereal-bowl .cereal-1 circle'),
+				cereal2 = this.$el.find('.cereal-bowl .cereal-2 circle');
 
 			function indicatorWidth( indicator, offset ){
 				indicator.width( offset + 50 )
@@ -131,24 +154,90 @@ define([
 					
 				},
 				slide: function( event, ui ){
+					data[cereal] = ui.value;
+					var currentAmount = data.c1 + data.c2 + data.c3,
+						c1Colors = ['#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
+						c2Colors = ['#e3be98', '#d4a77b'],
+						c2Colors = ['#00b3e3'],
+						showCereal,
+						hideCereal;
 					indicatorWidth( indicator, handle.offset().left + 17 );
-					if ( amountCheck() === false ){
-						handle.removeAttr('style')
-						handle.css('left','0')
-					} else {
-						$(this).css('pointer-events','none')
 
-					}
+					
+
+					// if ( amountCheck() === false ){
+					// 	handle.removeAttr('style')
+					// 	handle.css('left','0')
+					// } else {
+					// 	$(this).css('pointer-events','none')
+
+					// }
 					if ( ui.value == 1 )
 						cerealAmount = 'Half a bowl';
 					else if ( ui.value == 2 )
 						cerealAmount = 'Full bowl';
 
+					if ( cereal == 'c1' ){
+						colorSet = c1Colors;
+					} else if ( cereal == 'c2' ){
+						colorSet = c2Colors;
+					} else if ( cereal == 'c3' ){
+						colorSet = c3Colors;
+					}
+
+					if ( currentAmount == 0 && ui.value == 0){
+						hideCereal = cereal1;
+					} else if ( currentAmount == 0 && ui.value == 1){
+						showCereal = cereal1;
+						hideCereal = cereal2;
+						
+
+					} else if ( currentAmount == 1 && ui.value == 1){
+						showCereal = cereal1;
+						hideCereal = cereal2;
+
+					} else if ( currentAmount == 1 && ui.value == 0){
+						showCereal = cereal1;
+						hideCereal = cereal2;
+
+						if ( cereal2.closest('svg').is(':visible') ){
+							var colorSet;
+							for ( var c in data ){
+								if ( data[c] == 1){
+									if ( c == 'c1' ){
+										colorSet = c1Colors;
+									} else if ( c == 'c2' ){
+										colorSet = c2Colors;
+									} else if ( c == 'c3' ){
+										colorSet = c3Colors;
+									}
+								}
+							}
+						}
+					} else if ( currentAmount == 2 && ui.value == 1) {
+						showCereal = cereal2;
+						console.log('full')
+					} else if ( currentAmount == 2 && ui.value == 2){
+						showCereal = cereal2;
+					}
+
+						
+						if ( hideCereal )
+							hideCereal.closest('svg').hide();
+						if ( showCereal ){
+							showCereal.closest('svg').show();
+
+							for ( var i = 0; i < showCereal.length; i++ ){
+								showCereal[i].setAttribute('fill', colorSet[Math.floor(Math.random() * colorSet.length)])
+							}
+						}
+					
+
 					value.text( cerealAmount );
 				},
 				stop: function( event, ui ){
 					indicatorWidth( indicator, handle.offset().left )
-					data[cereal] = ui.value;
+					
 				}
 			});
 		},

@@ -5,11 +5,11 @@
 	z-index: 500;
 	width: 100%;
 	height: $nav-height;
-	background-color: $primary-color;
+	background-color: white;
 
 	.nav-toggle {
 		position: absolute;
-		top: 12px;
+		top: 18px;
 		z-index: 200;
 		fill: white;
 		right: $horiz-pad;

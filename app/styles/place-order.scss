@@ -1,22 +1,70 @@
 .order-button {
 	position: fixed;
-	top: 7px;
-	left: 7px;
+	top: 9px;
+	left: $horiz-pad;
 	z-index: 600;
+
+	&.inactive {
+		background-color: $primary-color;
+	}
+
+	&.active {
+		background-color: tomato;
+	}
 }
+
+
 
 .cereal-bowl {
 	position: fixed;
-	z-index: 90;
+	// z-index: 90;
 	top: 50px;
-	height: 100px;
+	height: 150px;
 	width: 100%;
 	background-color: $primary-2;
+	text-align: center;
+	padding-top: 30px;
+
+	.bowl-wrapper {
+		margin-left: -200px;
+	}
+
+	img, svg, .milk-fill {
+		width: 200px;
+		position: absolute;
+	}
+	.empty-bowl {
+		z-index: 100;
+	}
+
+	.milk {
+		width: 90px;
+		margin-left: 58px;
+		margin-top: 132px;
+		top: -12px;
+		z-index: 10;
+	}
+
+	.milk-fill {
+		z-index: 5;
+		margin-top: 143px;
+		top: -5px;
+		width: 200px;
+		height: 5px;
+		background-color: white;
+	}
+
+	svg {
+		display: none;
+		margin-top: -40px;
+		height: 195px;
+		z-index: 20;
+	}
 }
 
 .sliders-wrapper {
 	padding: 10px;
-	padding-top: 100px;
+	padding-top: 150px;
 	// text-align: center;
 
 	> div {
@@ -25,6 +73,7 @@
 
 	h3 {
 		// text-align: center;
+		 font-family: 'dinprobold';
 	}
 
 	.slider, .amount-indicator {
@@ -34,8 +83,9 @@
 
 	.slider {
 		width: 100%;
-		margin: 15px 0;
-		background-color: #ccc;
+		margin: 25px 0;
+		background-color: white;
+		border: 3px solid $primary-2;
 		position: relative;
 	}
 
@@ -48,21 +98,23 @@
 
 	.amount {
 		position: absolute;
-		top: -33px;
+		top: -50px;
 		right: $horiz-pad;
 	}
 
 	.ui-slider-handle {
-		outline: 1px solid;
-		width: 30px;
-		height: 30px;
+		width: 40px;
+		height: 40px;
 		position: absolute;
+		margin-left: -30px;
+		outline: 0;
 
 		img {
 			// position: absolute;
-			width: 100px;
-			height: 60px;
-			margin-top: -38px;
+			width: 80px;
+			// height: 60px;
+			margin-top: -31px;
+			margin-left: -12px;
 			pointer-events: none;
 
 		}

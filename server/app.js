@@ -51,10 +51,10 @@ connection.connect(function(err) {
 // 	console.log('error', err, 'results', results);
 // });
 
-// // create ranks table
-// connection.query('CREATE TABLE user (id int(8) NOT NULL AUTO_INCREMENT, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
-// 	console.log('error', err, 'results', results);
-// });
+// create ranks table
+connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
+	console.log('error', err, 'results', results);
+});
 
 // connection.end();
 
@@ -128,6 +128,14 @@ app.get('/completed_orders/:id', function( req, res ){
 		res.send( results )
 	});
 
+});
+
+// get leaderboard
+app.get('/users', function( req, res ){
+	connection.query('SELECT * FROM users order by rank desc LIMIT 6', function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
 });
 
 // get user info
