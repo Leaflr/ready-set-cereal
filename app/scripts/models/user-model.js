@@ -50,8 +50,11 @@ define([
 				if ( user ) {
 					// delete localStorage['user']
 					userEntry = JSON.parse(user);
+					this.url = '/user/' + userEntry.insertId;
+					this.fetch();
+					console.log(userEntry, this)
 					
-					this.set(userEntry)
+					// this.set(userEntry)
 				} else {
 					userEntry = {
 						rank: 1
