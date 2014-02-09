@@ -10,7 +10,7 @@ var socketIO = require('socket.io');
 
 var mysql = require('mysql');
 
-var connection = mysql.createConnection('mysql://rsc:g00byeworld!@leaflr.com/rsc?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
+var connection = mysql.createConnection('mysql://rsc:g00dbyeworld!@leaflr.com/rsc?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
 
 // init express
 var app = express();
