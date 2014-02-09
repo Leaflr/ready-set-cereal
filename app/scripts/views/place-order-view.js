@@ -87,6 +87,8 @@ define([
 					indicatorWidth( indicator, handle.offset().left )
 				},
 				slide: function( event, ui ){
+					data.milk = parseFloat(ui.value);
+					
 					indicatorWidth( indicator, handle.offset().left + 17 );
 
 					var top = -(ui.value * 8),
