@@ -158,7 +158,7 @@ define([
 					var currentAmount = data.c1 + data.c2 + data.c3,
 						c1Colors = ['#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
 						c2Colors = ['#e3be98', '#d4a77b'],
-						c2Colors = ['#00b3e3'],
+						c3Colors = ['#00b3e3'],
 						showCereal,
 						hideCereal;
 					indicatorWidth( indicator, handle.offset().left + 17 );
@@ -172,7 +172,9 @@ define([
 					// 	$(this).css('pointer-events','none')
 
 					// }
-					if ( ui.value == 1 )
+					if ( ui.value == 0 )
+						cerealAmount = 'None';
+					else if ( ui.value == 1 )
 						cerealAmount = 'Half a bowl';
 					else if ( ui.value == 2 )
 						cerealAmount = 'Full bowl';

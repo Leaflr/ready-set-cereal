@@ -4,6 +4,33 @@ define([
 ], function( Backbone, Communicator ){
 	'use strict';
 
+	var ranks = {
+		1: {
+			icon: 'rsc-badge-pacifier.svg',
+			name: 'Noob'
+		},
+		2: {
+			icon: 'rsc-badge-spoon.svg',
+			name: 'Spoonologist'
+		},
+		3: {
+			icon: 'rsc-badge-milk.svg',
+			name: 'Milk Master'
+		},
+		4: {
+			icon: 'rsc-badge-bowl.svg',
+			name: 'Bowl Boss'
+		},
+		5: {
+			icon: 'rsc-badge-serious.svg',
+			name: 'Serious Cereal'
+		},
+		6: {
+			icon: 'rsc-badge-destroyer.svg',
+			name: 'Destroyer of Cereal'
+		}
+	}
+
 	var UserModel = Backbone.Model.extend({
 		// url: '/user'
 		initialize: function(){
@@ -41,6 +68,8 @@ define([
 			}
 
 			this.set('next-rank', this.get('rank') + 1);
+			this.set('rank-name', ranks[this.get('rank')].name )
+			this.set('rank-icon', ranks[this.get('rank')].icon )
 		}
 	});
 
