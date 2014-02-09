@@ -56,7 +56,7 @@ connection.connect(function(err) {
 // });
 
 // create ranks table
-// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
+// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank-name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
 // 	console.log('error', err, 'results', results);
 // });
 
@@ -171,7 +171,7 @@ app.post('/new_user', function( req, res ){
 
 // a new order is entered
 app.post('/new_order', function( req, res ){
-	connection.query('INSERT INTO pending_orders VALUES ? ', req.body, function(err, result) {
+	connection.query('INSERT INTO pending_orders VALUES (?)', req.body, function(err, result) {
   		console.log(err, result)
 	});
 });
