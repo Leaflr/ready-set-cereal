@@ -106,10 +106,10 @@ interval = setInterval(function(){
 }, 3000);
 
 app.get('/status', function( req, res ){
-	connection.query('SELECT * FROM current-status', function( err, results ){
-		console.log('error', err);
-		res.send( results )
-	});
+	// connection.query('SELECT * FROM current-status', function( err, results ){
+	// 	console.log('error', err);
+	// 	res.send( results )
+	// });
 });
 
 // gets all orders if no id is specified
