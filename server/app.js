@@ -56,7 +56,7 @@ connection.connect(function(err) {
 // });
 
 // create ranks table
-// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
+// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank-name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
 // 	console.log('error', err, 'results', results);
 // });
 
@@ -106,10 +106,10 @@ interval = setInterval(function(){
 }, 3000);
 
 app.get('/status', function( req, res ){
-	connection.query('SELECT * FROM current-status', function( err, results ){
-		console.log('error', err);
-		res.send( results )
-	});
+	// connection.query('SELECT * FROM current-status', function( err, results ){
+	// 	console.log('error', err);
+	// 	res.send( results )
+	// });
 });
 
 // gets all orders if no id is specified
@@ -162,23 +162,30 @@ app.get('/user/:id', function( req, res ){
 	});
 });
 
+app.post('/new_user', function( req, res ){
+	connection.query('INSERT INTO users SET ?', req.body, function(err, result) {
+  		console.log( err, result )
+  		res.send( result );
+	});
+});
+
 // a new order is entered
 app.post('/new_order', function( req, res ){
-	connection.query('INSERT INTO pending-orders SET ?', req.body, function(err, result) {
-  		
+	connection.query('INSERT INTO pending_orders VALUES (?)', req.body, function(err, result) {
+  		console.log(err, result)
 	});
 });
 
 // skips to next order if there is a wait
 app.post('/skip_order', function( req, res ){
-	connection.query('DELETE FROM pending-orders WHERE timestamp IS NOT NULL order by timestamp desc LIMIT 1', function( err, results ){
+	connection.query('DELETE FROM pending_orders WHERE timestamp IS NOT NULL order by timestamp desc LIMIT 1', function( err, results ){
 		
 	});
 });
 
 // user cancels their order
 app.post('/cancel_order/:id', function( req, res ){
-	connection.query('DELETE * FROM pending-orders WHERE id=' + connection.escape(req.params.id), function( err, results ){
+	connection.query('DELETE * FROM pending_orders WHERE id=' + connection.escape(req.params.id), function( err, results ){
 		
 	});
 });
@@ -186,7 +193,7 @@ app.post('/cancel_order/:id', function( req, res ){
 
 
 // start server
-server.listen(9000, function(){
+server.listen(9005, function(){
     console.log('Express App started!');
 });
 

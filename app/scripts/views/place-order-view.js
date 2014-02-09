@@ -8,6 +8,8 @@ define([
 	'use strict';
 
 	var data = { 
+		order_id: 0,
+		spoon: 1,
 		milk: 0,
 		c1: 0,
 		c2: 0,
@@ -87,6 +89,8 @@ define([
 					indicatorWidth( indicator, handle.offset().left )
 				},
 				slide: function( event, ui ){
+					data.milk = parseFloat(ui.value);
+
 					indicatorWidth( indicator, handle.offset().left + 17 );
 
 					var top = -(ui.value * 8),
@@ -110,7 +114,7 @@ define([
 				},
 				stop: function( event, ui ){
 					indicatorWidth( indicator, handle.offset().left )
-					data.milk = ui.value;
+					data.milk = parseFloat(ui.value);
 				}
 			});
 		},
@@ -154,11 +158,11 @@ define([
 					
 				},
 				slide: function( event, ui ){
-					data[cereal] = ui.value;
+					data[cereal] = parseFloat(ui.value);
 					var currentAmount = data.c1 + data.c2 + data.c3,
 						c1Colors = ['#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
 						c2Colors = ['#e3be98', '#d4a77b'],
-						c2Colors = ['#00b3e3'],
+						c3Colors = ['#00b3e3'],
 						showCereal,
 						hideCereal;
 					indicatorWidth( indicator, handle.offset().left + 17 );
@@ -172,7 +176,9 @@ define([
 					// 	$(this).css('pointer-events','none')
 
 					// }
-					if ( ui.value == 1 )
+					if ( ui.value == 0 )
+						cerealAmount = 'None';
+					else if ( ui.value == 1 )
 						cerealAmount = 'Half a bowl';
 					else if ( ui.value == 2 )
 						cerealAmount = 'Full bowl';
@@ -190,8 +196,6 @@ define([
 					} else if ( currentAmount == 0 && ui.value == 1){
 						showCereal = cereal1;
 						hideCereal = cereal2;
-						
-
 					} else if ( currentAmount == 1 && ui.value == 1){
 						showCereal = cereal1;
 						hideCereal = cereal2;
@@ -243,14 +247,26 @@ define([
 		},
 
 		submitOrder: function(){
-			
+			for ( var keys in data ){
+				if ( keys == 'c1' || keys == 'c2' || keys == 'c3' ){
+					if (data[keys] == 1)
+						data[keys] = 50
+					else if (data[keys] == 2)
+						data[keys] = 100
+				}
+			}
+
+			this.$el.hide();
+
 			$.ajax({
 				url: '/new_order',
 				type: 'POST',
 				data: data
-			}).success(function(){
-
+			}).success(function(data){
+				console.log(data)
 			});
+
+
 		}
 
 	});

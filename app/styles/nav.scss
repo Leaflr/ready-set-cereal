@@ -17,6 +17,7 @@
 	
 	.nav-content {
 		position: fixed;
+		z-index: 300;
 		width: 85%;
 		min-height: calc(100% - $nav-height);
 		right: -85%;
@@ -47,11 +48,17 @@
 			.rank-icon {
 				margin: 0 auto;
 				margin-bottom: 8px;
-				width: 100px;
-				height: 100px;
-				border-radius: 50%;
-				background-color: tomato;
+
+				img {
+					width: 130px;
+					height: 130px;
+				}
 			}
+		}
+
+		.rank-name {
+    		font-family: 'dinprobold';
+
 		}
 	}
 

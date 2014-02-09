@@ -13,12 +13,11 @@
 	}
 }
 
-
-
 .cereal-bowl {
 	position: fixed;
 	z-index: 90;
 	top: 50px;
+	left: 0;
 	margin-left: -$horiz-pad;
 	height: 150px;
 	width: 100%;
@@ -34,6 +33,7 @@
 		width: 200px;
 		position: absolute;
 	}
+
 	.empty-bowl {
 		z-index: 100;
 	}
@@ -101,6 +101,8 @@
 		position: absolute;
 		top: -50px;
 		right: $horiz-pad;
+    font-family: 'dinprobold';
+
 	}
 
 	.ui-slider-handle {

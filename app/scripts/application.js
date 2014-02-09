@@ -27,8 +27,9 @@ function( Backbone, Communicator, userModel, orderModel, dispensorStatusModel, l
 
 	/* Add initializers here */
 	App.addInitializer( function () {
-		App.user.show( new userView({ model: userModel }) );
 		App.orderStatus.show( new orderStatusView({ model: orderModel }) );
+		
+		App.user.show( new userView({ model: userModel }) );
 		App.dispensorStatus.show( new dispensorStatusView({ model: dispensorStatusModel }) );
 		App.leaderboard.show( new leaderboardsView({ collection: leaderboardsCollection }) );
 	});
