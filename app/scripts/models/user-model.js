@@ -62,9 +62,11 @@ define([
 					this.set(userEntry);
 					this.url = '/new_user';
 
-					this.save(userEntry).success(function( data ){
-						console.log( data )
-					});
+					this.save(userEntry, {
+						success:function(data){
+							console.log(data)
+						} 
+					})
 
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
 				// }
