@@ -46,52 +46,60 @@ define([
 				user = localStorage.getItem('user'),
 				userEntry;
 
-			if ( supportsLocal === true ){
-				// if ( user ) {
-					delete localStorage['user']
+			// if ( supportsLocal === true ){
+			// 	if ( user ) {
+					// delete localStorage['user']
 					var self = this;
 					userEntry = JSON.parse(user);
-					this.url = '/user/' + userEntry.insertId;
 
-					this.fetch().success(function(){
-						console.log(self)
-						self.set('next-rank', self.get('rank') + 1);
-						self.set('rank-name', ranks[self.get('rank')].name )
-						self.set('rank-icon', ranks[self.get('rank')].icon )
+					this.set({ 
+						icon: 'rsc-badge-destroyer.svg',
+						'rank-name': 'Destroyer of Cereal',
+						'next-rank': 2,
+						name: 'Andy Axton',
+						rank: 1
 					});
-					console.log(userEntry, this)
+					// this.url = '/user/' + userEntry.insertId;
+					// 	self.set('next-rank', self.get('rank') + 1);
+					// 	self.set('rank-name', ranks[self.get('rank')].name )
+					// 	self.set('rank-icon', ranks[self.get('rank')].icon )
+					// 	this.fetch().success(function(){
+					// 	console.log(self)
+						
+					// });
+					// console.log(userEntry, this)
 
 					// this.set(userEntry)
 
 					
 				// } else {
-					var self = this;
+				// 	var self = this;
 
-					userEntry = {
-						rank: 1,
-						name: ''
-					}
+				// 	userEntry = {
+				// 		rank: 1,
+				// 		name: ''
+				// 	}
 
-					this.set(userEntry);
-					this.url = '/new_user';
+				// 	this.set(userEntry);
+				// 	this.url = '/new_user';
 
-					this.save(userEntry, {
-						success:function(data){
-							userEntry.insertId = self.get('insertId');
-							localStorage.setItem('user', JSON.stringify( userEntry ) );
-						} 
-					})
+				// 	this.save(userEntry, {
+				// 		success:function(data){
+				// 			userEntry.insertId = self.get('insertId');
+				// 			localStorage.setItem('user', JSON.stringify( userEntry ) );
+				// 		} 
+				// 	})
 					
-					console.log(userEntry)
+				// 	console.log(userEntry)
 
 					
 				// }
 
 				
 
-			} else {
-				console.log('nooope');
-			}
+			// } else {
+			// 	console.log('nooope');
+			// }
 
 			
 		}

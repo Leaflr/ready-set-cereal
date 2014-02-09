@@ -120,7 +120,7 @@ define([
 		},
 
 		initCerealSliders: function(){
-			var indicator, handle, value, cereal, 
+			var indicator, handle, value, cereal, disabled, 
 				cerealAmount = 'None', 
 				self = this,
 				cereal1 = this.$el.find('.cereal-bowl .cereal-1 circle'),
@@ -141,7 +141,7 @@ define([
 			}
 
 			this.$el.find('.cereal').on('mousedown', function(e){
-				
+		
 				
 			}).slider({
 				min: 0,
@@ -156,12 +156,15 @@ define([
 					handle = $(this).find('.ui-slider-handle');
 					indicatorWidth( indicator, handle.offset().left );
 					
+					if (disabled == true){
+						console.log('disabled')
+					}
 				},
 				slide: function( event, ui ){
 					data[cereal] = parseFloat(ui.value);
 					var currentAmount = data.c1 + data.c2 + data.c3,
 						c1Colors = ['#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
-						c2Colors = ['#e3be98', '#d4a77b'],
+						c2Colors = ['#f9eb2a', '#ffcd1e','#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
 						c3Colors = ['#00b3e3'],
 						showCereal,
 						hideCereal;
@@ -199,7 +202,7 @@ define([
 					} else if ( currentAmount == 1 && ui.value == 1){
 						showCereal = cereal1;
 						hideCereal = cereal2;
-
+						disabled = true;
 					} else if ( currentAmount == 1 && ui.value == 0){
 						showCereal = cereal1;
 						hideCereal = cereal2;
@@ -220,7 +223,7 @@ define([
 						}
 					} else if ( currentAmount == 2 && ui.value == 1) {
 						showCereal = cereal2;
-						console.log('full')
+						
 					} else if ( currentAmount == 2 && ui.value == 2){
 						showCereal = cereal2;
 					}
@@ -240,6 +243,12 @@ define([
 					value.text( cerealAmount );
 				},
 				stop: function( event, ui ){
+					var currentAmount = data.c1 + data.c2 + data.c3;
+
+					if ( currentAmount == 1 && ui.value == 1){
+						disabled = true;
+					}
+
 					indicatorWidth( indicator, handle.offset().left )
 					
 				}
