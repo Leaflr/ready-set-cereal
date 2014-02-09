@@ -49,13 +49,24 @@ define([
 			if ( supportsLocal === true ){
 				if ( user ) {
 					// delete localStorage['user']
+					var self = this;
 					userEntry = JSON.parse(user);
 					this.url = '/user/' + userEntry.insertId;
-					this.fetch();
+
+					this.fetch().success(function(){
+						console.log(self)
+						self.set('next-rank', self.get('rank') + 1);
+						self.set('rank-name', ranks[self.get('rank')].name )
+						self.set('rank-icon', ranks[self.get('rank')].icon )
+					});
 					console.log(userEntry, this)
-					
+
 					// this.set(userEntry)
+
+					
 				} else {
+					var self = this;
+
 					userEntry = {
 						rank: 1
 					}
@@ -65,21 +76,22 @@ define([
 
 					this.save(userEntry, {
 						success:function(data){
-							console.log(data)
+							userEntry.insertId = self.get('insertId');
 						} 
 					})
 
-					userEntry.insertId = this.model.get('insertId');
+					
 
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
 				}
+
+				
+
 			} else {
 				console.log('nooope');
 			}
 
-			this.set('next-rank', this.get('rank') + 1);
-			this.set('rank-name', ranks[this.get('rank')].name )
-			this.set('rank-icon', ranks[this.get('rank')].icon )
+			
 		}
 	});
 
