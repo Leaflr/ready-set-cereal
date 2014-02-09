@@ -164,6 +164,7 @@ app.get('/user/:id', function( req, res ){
 
 app.post('/new_user', function( req, res ){
 	connection.query('INSERT INTO users SET ?', req.body, function(err, result) {
+  		console.log( err, result )
   		res.send( result );
 	});
 });
