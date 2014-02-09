@@ -17,7 +17,8 @@
     "chai": "~1.7.2",
     "sinon": "~1.7.3",
     "jquery-ui-touch-punch": "*",
-    "jquery-ui": "~1.10.3"
+    "jquery-ui": "~1.10.3",
+    "fastclick-amd": "*"
   },
   "devDependencies": {},
   "directory": "bower_components"

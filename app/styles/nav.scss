@@ -1,0 +1,64 @@
+#nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 500;
+	width: 100%;
+	height: $nav-height;
+	background-color: tomato;
+
+	.nav-toggle {
+		position: absolute;
+		top: 12px;
+		z-index: 200;
+		fill: white;
+		stroke: white;
+		right: $horiz-pad;
+	}
+	
+	.nav-content {
+		position: fixed;
+		width: 85%;
+		min-height: calc(100% - $nav-height);
+		right: -85%;
+		background-color: #333;
+		padding: 20px;
+		height: 100%;
+	}
+}
+
+.nav-content {
+	
+
+	.user-info {
+		p {
+			margin: 3px 0;
+		}
+		.rank-info {
+			text-align: center;
+
+			.rank-icon {
+				margin: 0 auto;
+				margin-bottom: 8px;
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				background-color: tomato;
+			}
+		}
+	}
+	ul.nav {
+		margin: 0;
+		padding: 0;
+		margin-top: 50px;
+		width: 100%;
+		bottom: 0;
+		list-style: none;
+
+		li {
+			text-align: center;
+			color: white;
+			padding: 8px 0;
+		}
+	}
+}

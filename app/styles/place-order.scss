@@ -1,0 +1,78 @@
+.order-button {
+	position: fixed;
+	top: 7px;
+	left: 7px;
+	z-index: 600;
+}
+
+.cereal-bowl {
+	position: fixed;
+	z-index: 90;
+	top: 50px;
+	height: 100px;
+	width: 100%;
+	background-color: #ccc;
+}
+
+.sliders-wrapper {
+	padding: 10px;
+	padding-top: 100px;
+	text-align: center;
+
+	> div {
+		text-align: center;
+	}
+
+	h3 {
+		text-align: center;
+	}
+
+	.slider, .amount-indicator {
+		border-radius: 15px;
+		height: 30px;
+	}
+
+	.slider {
+		width: 100%;
+		margin: 15px 0;
+		background-color: #ccc;
+		position: relative;
+	}
+
+	.amount-indicator {
+		position: absolute;
+		// background-color: tomato;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.amount {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+	}
+
+	.ui-slider-handle {
+		outline: 1px solid;
+		width: 30px;
+		height: 30px;
+		position: absolute;
+
+		img {
+			// position: absolute;
+			width: 100px;
+			height: 60px;
+			margin-top: -38px;
+			pointer-events: none;
+
+		}
+
+	}
+
+
+}
+.submit-order {
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}

@@ -11,7 +11,7 @@
         <title></title>
 
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         
@@ -31,9 +31,19 @@
         <!-- endbuild -->
         
         <!-- SHOWS CREATE NEW ORDER BUTTON OR CANCEL ORDER DEPENDING ON USER'S ORDER STATUS -->
-        <div id="order-status"></div>
+        
 
-        <div id="user"></div>
+        <div id="nav">
+            <div id="user">
+                
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div id="order-status" class="page"></div>
+            <div id="dispensor-status" class="page"></div>
+            <div id="leaderboard" class="page"></div>
+        </div>
 
         <script>document.write('<script src="http://'
             + (location.host || 'localhost').split(':')[0]

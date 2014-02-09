@@ -10,14 +10,14 @@ var socketIO = require('socket.io');
 
 var mysql = require('mysql');
 
-var connection = mysql.createConnection('mysql://root:root@127.0.0.1:8889/rsc?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
+var connection = mysql.createConnection('mysql://rsc:g00byeworld!@leaflr.com/rsc?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
 
 // init express
 var app = express();
 
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
-
+    app.use(express.bodyParser());
     app.set('view engine', 'handlebars');
     app.set('views', __dirname + '../app/scripts/views');
 });
@@ -56,7 +56,7 @@ connection.connect(function(err) {
 // 	console.log('error', err, 'results', results);
 // });
 
-connection.end();
+// connection.end();
 
 // route index.html
 app.get('/', function(req, res){
@@ -71,24 +71,77 @@ app.get('/machine', function(req, res){
 
 // mysql updates
 
+// get ranks
+app.get('/ranks/:id', function( req, res ){
+	connection.connect();
+
+	var query;
+
+	if ( req.params.id )
+		query = 'SELECT * FROM ranks WHERE id=' + connection.escape(req.params.id);
+	else
+		query = 'SELECT * FROM ranks';
+
+	connection.query(query, function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
+
+	connection.end();
+});
+
 // check machine status/info
 app.get('/status', function( req, res ){
+	connection.connect();
 
+	connection.query('SELECT * FROM status', function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
+
+	connection.end();
 });
 
 // gets all orders if no id is specified
 app.get('/orders/:id', function( req, res ){
+	connection.connect();
 
+	var query;
+
+	if ( req.params.id )
+		query = 'SELECT * FROM orders WHERE id=' + connection.escape(req.params.id);
+	else
+		query = 'SELECT * FROM orders';
+
+	connection.query(query, function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
+
+	connection.end();
 });
 
 // get user info
-app.get('/user', function( req, res ){
+app.get('/user/:id', function( req, res ){
+	connection.connect();
 
+	connection.query('SELECT * FROM users WHERE id=' + connection.escape(req.params.id), function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
+
+	connection.end();
 });
 
 // a new order is entered
 app.post('/new_order', function( req, res ){
+	// connection.connect();
+	console.log(req.body)
+	connection.query('INSERT INTO pending-orders SET ?', req.body, function(err, result) {
+  		
+	});
 
+	// connection.end();
 });
 
 // skips to next order if there is a wait
@@ -98,7 +151,14 @@ app.post('/skip_order', function( req, res ){
 
 // user cancels their order
 app.post('/cancel_order/:id', function( req, res ){
-	
+	connection.connect();
+
+	connection.query('SELECT * FROM pending-orders WHERE id=' + connection.escape(req.params.id), function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
+
+	connection.end();
 });
 
 

@@ -32,6 +32,7 @@ require.config({
 
         'jquery-ui': '../bower_components/jquery-ui/ui/minified/jquery-ui.min',
         'jquery-ui-touch-punch': '../bower_components/jquery-ui-touch-punch/jquery.ui.touch-punch.min',
+        fastclick: '../bower_components/fastclick-amd/fastclick',
 
         /* Alias text.js for template loading and shortcut the templates dir to tmpl */
         text: '../bower_components/requirejs-text/text',

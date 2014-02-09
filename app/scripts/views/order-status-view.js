@@ -20,7 +20,7 @@ define([
 		},
 		initialize: function(){
 			var activeOrder = userModel.get('activeOrder');
-
+			this.placeOrder()
 			// if user has an active order show views
 			if ( activeOrder ){
 				this.template = orderStatusActiveTemp
