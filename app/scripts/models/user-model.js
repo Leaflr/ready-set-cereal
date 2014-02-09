@@ -47,7 +47,7 @@ define([
 				userEntry;
 
 			if ( supportsLocal === true ){
-				if ( user ) {
+				// if ( user ) {
 					// delete localStorage['user']
 					var self = this;
 					userEntry = JSON.parse(user);
@@ -64,11 +64,12 @@ define([
 					// this.set(userEntry)
 
 					
-				} else {
+				// } else {
 					var self = this;
 
 					userEntry = {
-						rank: 1
+						rank: 1,
+						name: ''
 					}
 
 					this.set(userEntry);
@@ -83,7 +84,7 @@ define([
 					
 
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
-				}
+				// }
 
 				
 
