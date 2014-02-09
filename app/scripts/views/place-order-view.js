@@ -110,7 +110,7 @@ define([
 				},
 				stop: function( event, ui ){
 					indicatorWidth( indicator, handle.offset().left )
-					data.milk = ui.value;
+					data.milk = parseFloat(ui.value);
 				}
 			});
 		},
@@ -154,7 +154,7 @@ define([
 					
 				},
 				slide: function( event, ui ){
-					data[cereal] = ui.value;
+					data[cereal] = parseFloat(ui.value);
 					var currentAmount = data.c1 + data.c2 + data.c3,
 						c1Colors = ['#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
 						c2Colors = ['#e3be98', '#d4a77b'],
@@ -246,9 +246,9 @@ define([
 			for ( var keys in data ){
 				if ( keys == 'c1' || keys == 'c2' || keys == 'c3' ){
 					if (data[keys] == 1)
-						data[keys] == 50
+						data[keys] = 50
 					else if (data[keys] == 2)
-						data[keys] == 100
+						data[keys] = 100
 				}
 			}
 
@@ -259,6 +259,8 @@ define([
 			}).success(function(data){
 				console.log(data)
 			});
+
+
 		}
 
 	});
