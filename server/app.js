@@ -172,7 +172,7 @@ app.post('/new_user', function( req, res ){
 // a new order is entered
 app.post('/new_order', function( req, res ){
 	connection.query('INSERT INTO pending-orders SET ?', req.body, function(err, result) {
-  		
+  		console.log(err, result)
 	});
 });
 
