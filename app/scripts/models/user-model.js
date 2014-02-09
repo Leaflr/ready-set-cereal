@@ -60,7 +60,7 @@ define([
 					}
 
 					this.set(userEntry);
-					this.save(userEntry);
+					// this.save(userEntry);
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
 				}
 			} else {
