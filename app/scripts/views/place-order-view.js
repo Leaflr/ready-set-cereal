@@ -8,6 +8,7 @@ define([
 	'use strict';
 
 	var data = { 
+		spoon: 1,
 		milk: 0,
 		c1: 0,
 		c2: 0,
@@ -88,7 +89,7 @@ define([
 				},
 				slide: function( event, ui ){
 					data.milk = parseFloat(ui.value);
-					
+
 					indicatorWidth( indicator, handle.offset().left + 17 );
 
 					var top = -(ui.value * 8),
@@ -253,6 +254,8 @@ define([
 						data[keys] = 100
 				}
 			}
+
+			this.$el.hide();
 
 			$.ajax({
 				url: '/new_order',
