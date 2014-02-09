@@ -32,7 +32,7 @@ define([
 	}
 
 	var UserModel = Backbone.Model.extend({
-		// url: '/user'
+		url: '/user',
 		initialize: function(){
 			function supportsLocalCheck() {
 			  try {
@@ -60,7 +60,12 @@ define([
 					}
 
 					this.set(userEntry);
-					// this.save(userEntry);
+					this.url = '/new_user';
+
+					this.save(userEntry).success(function( data ){
+						console.log( data )
+					});
+
 					localStorage.setItem('user', JSON.stringify( userEntry ) );
 				}
 			} else {

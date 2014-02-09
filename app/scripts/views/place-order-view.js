@@ -192,8 +192,6 @@ define([
 					} else if ( currentAmount == 0 && ui.value == 1){
 						showCereal = cereal1;
 						hideCereal = cereal2;
-						
-
 					} else if ( currentAmount == 1 && ui.value == 1){
 						showCereal = cereal1;
 						hideCereal = cereal2;

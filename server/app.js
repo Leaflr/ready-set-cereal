@@ -162,6 +162,12 @@ app.get('/user/:id', function( req, res ){
 	});
 });
 
+app.post('/new_user', function( req, res ){
+	connection.query('INSERT INTO users SET ?', req.body, function(err, result) {
+  		res.send( result );
+	});
+});
+
 // a new order is entered
 app.post('/new_order', function( req, res ){
 	connection.query('INSERT INTO pending-orders SET ?', req.body, function(err, result) {
