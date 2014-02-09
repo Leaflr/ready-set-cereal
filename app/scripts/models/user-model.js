@@ -54,9 +54,7 @@ define([
 				// 	this.set(userEntry)
 				// } else {
 					userEntry = {
-						rank: 1,
-						activeOrder: '',
-						orders: '',
+						rank: 1
 					}
 
 					this.set(userEntry);
