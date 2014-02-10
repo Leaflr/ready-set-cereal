@@ -96,14 +96,11 @@ app.get('/ranks/:id', function( req, res ){
 var interval;
 
 interval = setInterval(function(){
-	// connection.query('SELECT * FROM current_status', function( err, results ){
-	// 	console.log('error', err);
- //    	io.sockets.emit('status', results);
-	// });
-	var test = 'test'
-    	io.sockets.emit('status', test);
-
-}, 3000);
+	connection.query('SELECT * FROM current_status', function( err, results ){
+		console.log('error', err);
+    	io.sockets.emit('status', results);
+	});
+}, 5000);
 
 app.get('/status', function( req, res ){
 	connection.query('SELECT * FROM current_status', function( err, results ){
@@ -118,9 +115,9 @@ app.get('/orders/:id', function( req, res ){
 	var query;
 
 	if ( req.params.id )
-		query = 'SELECT * FROM pending-orders WHERE id=' + connection.escape(req.params.id);
+		query = 'SELECT * FROM pending_orders WHERE id=' + connection.escape(req.params.id);
 	else
-		query = 'SELECT * FROM pending-orders';
+		query = 'SELECT * FROM pending_orders';
 
 	connection.query(query, function( err, results ){
 		console.log('error', err);
@@ -135,9 +132,9 @@ app.get('/completed_orders/:id', function( req, res ){
 	var query;
 
 	if ( req.params.id )
-		query = 'SELECT * FROM completed-orders WHERE id=' + connection.escape(req.params.id);
+		query = 'SELECT * FROM completed_orders WHERE id=' + connection.escape(req.params.id);
 	else
-		query = 'SELECT * FROM completed-orders';
+		query = 'SELECT * FROM completed_orders';
 
 	connection.query(query, function( err, results ){
 		console.log('error', err);
