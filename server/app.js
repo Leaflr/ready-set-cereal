@@ -119,7 +119,7 @@ app.get('/orders/:id', function( req, res ){
 	else
 		query = 'SELECT * FROM pending_orders';
 
-	connection.query(query, function( err, results ){
+	connection.query('SELECT * FROM pending_orders', function( err, results ){
 		console.log('error', err);
 		res.send( results )
 	});
