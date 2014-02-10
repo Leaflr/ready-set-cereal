@@ -96,7 +96,7 @@ app.get('/ranks/:id', function( req, res ){
 var interval;
 
 interval = setInterval(function(){
-	// connection.query('SELECT * FROM current-status', function( err, results ){
+	// connection.query('SELECT * FROM current_status', function( err, results ){
 	// 	console.log('error', err);
  //    	io.sockets.emit('status', results);
 	// });
@@ -106,10 +106,10 @@ interval = setInterval(function(){
 }, 3000);
 
 app.get('/status', function( req, res ){
-	// connection.query('SELECT * FROM current-status', function( err, results ){
-	// 	console.log('error', err);
-	// 	res.send( results )
-	// });
+	connection.query('SELECT * FROM current_status', function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
 });
 
 // gets all orders if no id is specified

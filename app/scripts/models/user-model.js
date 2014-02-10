@@ -53,7 +53,7 @@ define([
 					userEntry = JSON.parse(user);
 
 					this.set({ 
-						icon: 'rsc-badge-destroyer.svg',
+						'rank-icon': 'rsc-badge-destroyer.svg',
 						'rank-name': 'Destroyer of Cereal',
 						'next-rank': 2,
 						name: 'Andy Axton',
