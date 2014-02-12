@@ -41,7 +41,7 @@ define([
 			    return false;
 			  }
 			}
-					delete localStorage['user'];
+					// delete localStorage['user'];
 
 			var supportsLocal = supportsLocalCheck(),
 				user = localStorage.getItem('user'),
@@ -63,6 +63,7 @@ define([
 
 					this.fetch().success(function(data){
 						self.set('next-rank', self.get('rank') + 1);
+						console.log(self)
 					});
 
 				} else {
@@ -81,7 +82,6 @@ define([
 						name: userFirst + ' ' + userLast
 					}
 
-					console.log(userEntry)
 
 					this.set(userEntry);
 					this.url = '/new_user';
@@ -89,10 +89,10 @@ define([
 					this.save(userEntry, {
 						success:function(data){
 							localStorage.setItem('user', self.get('insertId'));
+							console.log('saved to local as ', self.get('insertId'))
 						} 
 					})
 					
-					console.log(userEntry)
 
 				}
 
