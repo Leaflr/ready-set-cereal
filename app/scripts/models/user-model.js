@@ -41,65 +41,67 @@ define([
 			    return false;
 			  }
 			}
+					delete localStorage['user'];
 
 			var supportsLocal = supportsLocalCheck(),
 				user = localStorage.getItem('user'),
 				userEntry;
 
-			// if ( supportsLocal === true ){
-			// 	if ( user ) {
-					// delete localStorage['user']
+			if ( supportsLocal === true ){
+				if ( user ) {
 					var self = this;
-					userEntry = JSON.parse(user);
 
-					this.set({ 
-						'rank-icon': 'rsc-badge-destroyer.svg',
-						'rank-name': 'Destroyer of Cereal',
-						'next-rank': 2,
-						name: 'Andy Axton',
-						rank: 1
-					});
-					// this.url = '/user/' + userEntry.insertId;
-					// 	self.set('next-rank', self.get('rank') + 1);
-					// 	self.set('rank-name', ranks[self.get('rank')].name )
-					// 	self.set('rank-icon', ranks[self.get('rank')].icon )
-					// 	this.fetch().success(function(){
-					// 	console.log(self)
-						
+					// this.set({ 
+					// 	'rank-icon': 'rsc-badge-destroyer.svg',
+					// 	'rank-name': 'Destroyer of Cereal',
+					// 	'next-rank': 2,
+					// 	name: 'Andy Axton',
+					// 	rank: 1
 					// });
-					// console.log(userEntry, this)
 
-					// this.set(userEntry)
+					this.url = '/user/' + user;
+
+					this.fetch().success(function(data){
+						self.set('next-rank', self.get('rank') + 1);
+					});
+
+				} else {
+					var self = this,
+						userFirst, userLast,
+						first = ['Sleepy','Master','Boss','Cereal','Spoon','Milk','Captain','Breakfast','Chow','Feast','General','Private','Sargeant','Sugar','Crunch','Junior','Senior','Lil\'','Big','Snack','Fancy','Ultimate','Mighty','Lieutenant'],
+						last = ['Connoisseur','Gobbler','Muncher','Snacker','Biter','Nibbler','Chewer','Cruncher','Spoon','Cereal','Snap','Crackle','Pop','Explosion','Flavor','Carton','Cup','Bowl','Munch','Crunch','Snack'];
+
+					userFirst = first[Math.floor(Math.random() * first.length)];
+					userLast = last[Math.floor(Math.random() * last.length)];
+
+					userEntry = {
+						rank: 1,
+						'rank-name':'Noob',
+						'active_order_id': 0,
+						name: userFirst + ' ' + userLast
+					}
+
+					console.log(userEntry)
+
+					this.set(userEntry);
+					this.url = '/new_user';
+
+					this.save(userEntry, {
+						success:function(data){
+							localStorage.setItem('user', self.get('insertId'));
+						} 
+					})
+					
+					console.log(userEntry)
 
 					
-				// } else {
-				// 	var self = this;
-
-				// 	userEntry = {
-				// 		rank: 1,
-				// 		name: ''
-				// 	}
-
-				// 	this.set(userEntry);
-				// 	this.url = '/new_user';
-
-				// 	this.save(userEntry, {
-				// 		success:function(data){
-				// 			userEntry.insertId = self.get('insertId');
-				// 			localStorage.setItem('user', JSON.stringify( userEntry ) );
-				// 		} 
-				// 	})
-					
-				// 	console.log(userEntry)
-
-					
-				// }
+				}
 
 				
 
-			// } else {
-			// 	console.log('nooope');
-			// }
+			} else {
+				console.log('nooope');
+			}
 
 			
 		}
