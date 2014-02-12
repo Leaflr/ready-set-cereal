@@ -59,7 +59,7 @@ connection.connect(function(err) {
 // });
 
 // create ranks table
-connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank-name varchar(100) NOT NULL, rank varchar(100) NOT NULL, active_order_id int(8) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
+connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank_name varchar(100) NOT NULL, rank varchar(100) NOT NULL, active_order_id int(8) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
 	console.log('error', err, 'results', results);
 });
 
