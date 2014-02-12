@@ -46,7 +46,7 @@ define([
 			var supportsLocal = supportsLocalCheck(),
 				user = localStorage.getItem('user'),
 				userEntry;
-				console.log(user)
+
 			if ( supportsLocal === true ){
 				if ( user ) {
 					var self = this;
@@ -69,7 +69,7 @@ define([
 				} else {
 					var self = this,
 						userFirst, userLast,
-						first = ['le','The Last','Señor','Sleepy','Master','Boss','Cereal','Spoon','Milk','Captain','Breakfast','Chow','Feast','General','Private','Sargeant','Sugar','Crunch','Junior','Senior','Lil\'','Big','Snack','Fancy','Ultimate','Mighty','Lieutenant'],
+						first = ['Silly','le','The Last','Señor','Sleepy','Master','Boss','Cereal','Spoon','Milk','Captain','Breakfast','Chow','Feast','General','Private','Sargeant','Sugar','Crunch','Junior','Senior','Lil\'','Big','Snack','Fancy','Ultimate','Mighty','Lieutenant'],
 						last = ['Connoisseur','Gobbler','Muncher','Snacker','Biter','Nibbler','Chewer','Cruncher','Spoon','Cereal','Snap','Crackle','Pop','Explosion','Flavor','Carton','Cup','Bowl','Munch','Crunch','Snack'];
 
 					userFirst = first[ Math.floor(Math.random() * first.length) ];
@@ -77,33 +77,35 @@ define([
 
 					userEntry = {
 						id: 0,
-						rank: '1',
-						'rank_name':'Noob',
-						'active_order_id': 0,
+						rank: parseInt(1),
+						rank_name: "Noob",
+						active_order_id: parseInt(0),
 						name: userFirst + ' ' + userLast
 					}
 
-					this.set(userEntry);
-
+					// this.set(userEntry);
+					console.log(userEntry)
 					$.ajax({
 						url: '/new_user',
 						type: 'POST',
-						data: userEntry
-					}).success(function(data){
+						data: userEntry,
+						error: function(d){
+							console.log(d)
+						}
+					}).always(function(data){
 						// localStorage.setItem('user', data);
 
 						console.log(data)
 					});
-
+					// this.url = '/new_user'
 					// this.save(userEntry, {
 					// 	success: function(data){
-					// 		localStorage.setItem('user', self.get('insertId'));
+					// 		// localStorage.setItem('user', self.get('insertId'));
 					// 		console.log('saved to local as ', self.get('insertId'))
 					// 	}, done: function(data){
 					// 		console.log(data)
 					// 	}
 					// });
-					
 
 				}
 

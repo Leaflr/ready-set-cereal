@@ -7,8 +7,11 @@ define([
 
 	return Backbone.Marionette.ItemView.extend({
 		template: dispensorStatusTemp,
+		className: 'nav-button inactive',
 		initialize: function(){
-			console.log(Communicator.socket)
+			Communicator.socket.on('status', function( data ){
+				console.log(data)
+			});
 		}
 
 	});

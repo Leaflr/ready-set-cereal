@@ -1,12 +1,13 @@
 define([
 	'backbone',
 	'communicator',
+	'application',
 	'models/user-model',
 	'views/place-order-view',
 	'views/cancel-order-view',
 	'hbs!/templates/order-status-active',
 	'hbs!/templates/order-status-inactive'
-], function( Backbone, Communicator, userModel, placeOrderView, cancelOrderView, orderStatusActiveTemp, orderStatusInactiveTemp ){
+], function( Backbone, Communicator, App, userModel, placeOrderView, cancelOrderView, orderStatusActiveTemp, orderStatusInactiveTemp ){
 	'use strict';
 
 	return Backbone.Marionette.Layout.extend({
@@ -14,13 +15,22 @@ define([
 			placeOrderForm: '#place-order-form',
 			modifyOrderForm: '#modify-order-form'
 		},
-		events: {
-			'click .inactive':'placeOrder',
-			'click .active':'cancelOrder'
-		},
 		initialize: function(){
-			var activeOrder = userModel.get('activeOrder');
-			this.placeOrder()
+			var activeOrder = userModel.get('activeOrder'),
+				self = this;
+
+			Communicator.events.on('placeOrder', function(){
+				self.placeOrder();
+			});
+
+			Communicator.events.on('cancelOrder', function(){
+				self.cancelOrder();
+			});
+
+			Communicator.events.on('hideOrder', function(){
+				self.placeOrderForm.close();
+			});
+
 			// if user has an active order show views
 			if ( activeOrder ){
 				this.template = orderStatusActiveTemp

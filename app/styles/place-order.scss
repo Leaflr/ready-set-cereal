@@ -16,10 +16,10 @@
 .cereal-bowl {
 	position: fixed;
 	z-index: 90;
-	top: 50px;
+	top: 60px;
 	left: 0;
 	// margin-left: -$horiz-pad;
-	height: 150px;
+	height: 160px;
 	width: 100%;
 	background-color: $primary-2;
 	text-align: center;
@@ -65,7 +65,7 @@
 
 .sliders-wrapper {
 	padding: 10px;
-	padding-top: 150px;
+	padding-top: 145px;
 	// text-align: center;
 
 	> div {
@@ -74,6 +74,10 @@
 
 	h3 {
 		// text-align: center;
+		color: white;
+		font-weight: 100;
+		font-size: 18px;
+		margin: 0;
 		 font-family: 'dinprobold';
 	}
 
@@ -84,9 +88,9 @@
 
 	.slider {
 		width: 100%;
-		margin: 25px 0;
+		margin: 10px 0 20px;
 		background-color: white;
-		border: 3px solid $primary-2;
+		border: 4px solid $primary-2;
 		position: relative;
 	}
 
@@ -99,27 +103,31 @@
 
 	.amount {
 		position: absolute;
-		top: -50px;
-		right: $horiz-pad;
-    font-family: 'dinprobold';
-
+		top: -37px;
+		right: 0px;
+    	font-family: 'dinprobold';
+		color: rgba(0,0,0,.7);
 	}
 
 	.ui-slider-handle {
 		width: 40px;
 		height: 40px;
 		position: absolute;
-		margin-left: -30px;
+		margin-top: -8px;
+		margin-left: -5px;
+		background-color: white;
+		border-radius: 50%;
+		border: 4px solid $primary-2;
 		outline: 0;
 
 		img {
 			// position: absolute;
-			width: 80px;
+			height: 30px;
 			// height: 60px;
-			margin-top: -31px;
-			margin-left: -12px;
-			pointer-events: none;
-
+			// margin-top: -31px;
+			// margin-left: -12px;
+			// pointer-events: none;
+			
 		}
 
 	}

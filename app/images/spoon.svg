@@ -1,3 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-<path id="spoon" d="M50.994,6.168c-8.492,0-10.787,16.306-10.787,22.265c0,5.338,6.165,8.958,6.165,8.958  c1.543,0.903,2.721,3.105,2.622,4.892c0,0-2.517,44.773-2.517,47.319c0,3.448,2.025,6.229,4.523,6.229  c2.502,0,4.521-2.78,4.521-6.229c0-2.546-2.511-47.319-2.511-47.319c-0.102-1.787,1.076-3.989,2.619-4.895  c0,0,6.165-3.621,6.165-8.955C61.781,22.474,59.482,6.168,50.994,6.168z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="90px" viewBox="0 0 22 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>spoon</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="spoon" sketch:type="MSLayerGroup" fill="#1F9BCC">
+            <path d="M10.994,0.168 C2.502,0.168 0.207,16.474 0.207,22.433 C0.207,27.771 6.372,31.391 6.372,31.391 C7.915,32.294 9.093,34.496 8.994,36.283 C8.994,36.283 6.477,81.056 6.477,83.602 C6.477,87.05 8.502,89.831 11,89.831 C13.502,89.831 15.521,87.051 15.521,83.602 C15.521,81.056 13.01,36.283 13.01,36.283 C12.908,34.496 14.086,32.294 15.629,31.388 C15.629,31.388 21.794,27.767 21.794,22.433 C21.781,16.474 19.482,0.168 10.994,0.168 L10.994,0.168 Z" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
 </svg>

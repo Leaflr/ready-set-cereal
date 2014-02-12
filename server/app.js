@@ -40,9 +40,9 @@ connection.connect(function(err) {
 
 });
 
-// connection.query('DROP TABLE users', function(err, result){
-// 	console.log(result)
-// })
+connection.query('DROP TABLE users', function(err, result){
+	console.log(result)
+})
 // create orders table
 // connection.query('CREATE TABLE orders (id int(8) NOT NULL AUTO_INCREMENT, milk varchar(100) NOT NULL, c1 int(8) NOT NULL, c2 int(8) NOT NULL, c3 int(8) NOT NULL, spoon varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, status varchar(100) NOT NULL, PRIMARY KEY (id) )', function( err, results ){
 // 	console.log('error', err, 'results', results);
@@ -59,9 +59,9 @@ connection.connect(function(err) {
 // });
 
 // create ranks table
-// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank_name varchar(100) NOT NULL, rank varchar(100) NOT NULL, active_order_id int(8) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
-// 	console.log('error', err, 'results', results);
-// });
+connection.query('CREATE TABLE users (id int(8) AUTO_INCREMENT, name varchar(100) NOT NULL, rank_name varchar(100) NOT NULL, rank int(8) NOT NULL, active_order_id int(8) NOT NULL, PRIMARY KEY (id) )', function( err, results ){
+	console.log('error', err, 'results', results);
+});
 
 // connection.end();
 
@@ -134,17 +134,18 @@ app.get('/user/:id', function( req, res ){
 });
 
 app.post('/new_user', function( req, res ){
-	connection.query('INSERT INTO users VALUES ?', req.body, function(err, result) {
+	
+	connection.query('INSERT INTO users VALUES (?)', req.body, function(err, result) {
   		console.log(req.body)
   		console.log( err, result)
-  		// res.send( result );
+  		res.send( {result:result, err: err, req: req.body} );
 	});
 });
 
 // a new order is entered
 app.post('/new_order', function( req, res ){
 	connection.query('INSERT INTO pending_orders VALUES (?)', req.body, function(err, result) {
-  		console.log(err, result, req.body)
+  		res.send( result );
 	});
 });
 

@@ -1,3 +1,54 @@
+.nav-toggle, #order-button, #dispensor-status {
+	width: 28%;
+	float: left;
+	padding: 7px 4px 0;
+	text-align: center;
+
+	.nav-button {
+		display: block;
+		border-radius: 6px;
+		border: 3px solid $primary-2;
+		background-color: $primary-color;
+		font-family: 'dinproblack';
+		font-size: 12px;
+		text-align: center;
+		width: 100%;
+		height: 45px;
+		padding: 0px;
+		text-transform: uppercase;
+		color: rgba(0,0,0,.65);
+
+		&.cancel {
+			background-color: #F08A78;
+			border: 3px solid #BF6D5F;
+		}
+
+		&.inactive {
+			border: 3px solid #dedede;
+			background-color: white;
+			color: #dedede;
+
+			.icon {
+				color: #dedede;
+			}
+		}
+	}
+
+	.icon {
+		color: white;
+		display: inherit;
+		position: relative;
+		top: -1px;
+		font-size: 24px;
+		line-height: 21px;
+	}
+}
+
+#dispensor-status {
+	width: 44%;
+}
+
+
 #nav {
 	position: fixed;
 	top: 0;
@@ -6,14 +57,15 @@
 	width: 100%;
 	height: $nav-height;
 	background-color: white;
+	padding: 0 5px;
 
-	.nav-toggle {
-		position: absolute;
-		top: 18px;
-		z-index: 200;
-		fill: white;
-		right: $horiz-pad;
-	}
+	// .nav-toggle {
+	// 	position: absolute;
+	// 	top: 18px;
+	// 	z-index: 200;
+	// 	fill: white;
+	// 	right: $horiz-pad;
+	// }
 	
 	.nav-content {
 		position: fixed;
