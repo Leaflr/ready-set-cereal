@@ -40,6 +40,9 @@ connection.connect(function(err) {
 
 });
 
+connection.query('DROP TABLE users', function(err, result){
+	console.log(result)
+})
 // create orders table
 // connection.query('CREATE TABLE orders (id int(8) NOT NULL AUTO_INCREMENT, milk varchar(100) NOT NULL, c1 int(8) NOT NULL, c2 int(8) NOT NULL, c3 int(8) NOT NULL, spoon varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, status varchar(100) NOT NULL, PRIMARY KEY (id) )', function( err, results ){
 // 	console.log('error', err, 'results', results);
@@ -56,7 +59,7 @@ connection.connect(function(err) {
 // });
 
 // create ranks table
-// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank-name varchar(100) NOT NULL, rank varchar(100) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
+// connection.query('CREATE TABLE users (id int(8) NOT NULL AUTO_INCREMENT, name varchar(100) NOT NULL, rank-name varchar(100) NOT NULL, rank varchar(100) NOT NULL, active_order_id int(8) NOT NULL, time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) )', function( err, results ){
 // 	console.log('error', err, 'results', results);
 // });
 
