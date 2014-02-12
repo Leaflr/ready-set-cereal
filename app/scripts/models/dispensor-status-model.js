@@ -8,9 +8,7 @@ define([
 		url: '/status',
 		initialize: function(){
 			this.fetch();
-
-			var socket = io.connect('http://localhost');
-			console.log(socket)
+			console.log(this);
 		}
 	});
 

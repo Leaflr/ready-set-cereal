@@ -71,26 +71,7 @@ app.get('/machine', function(req, res){
   res.sendfile( path.join( __dirname, '../app/machine.html' ) );
 });
 
-
-
 // mysql updates
-
-// get ranks
-app.get('/ranks/:id', function( req, res ){
-
-	var query;
-
-	if ( req.params.id )
-		query = 'SELECT * FROM ranks WHERE id=' + connection.escape(req.params.id);
-	else
-		query = 'SELECT * FROM ranks';
-
-	connection.query(query, function( err, results ){
-		console.log('error', err);
-		res.send( results )
-	});
-
-});
 
 // check machine status/info
 var interval;
@@ -111,36 +92,26 @@ app.get('/status', function( req, res ){
 
 // gets all orders if no id is specified
 app.get('/orders/:id', function( req, res ){
+	connection.query('SELECT * FROM pending_orders WHERE id = ?', req.params.id, function( err, results ){
+		console.log('error', err);
+		res.send( results )
+	});
+});
 
-	var query;
-
-	if ( req.params.id )
-		query = 'SELECT * FROM pending_orders WHERE id=' + connection.escape(req.params.id);
-	else
-		query = 'SELECT * FROM pending_orders';
-
+// gets all orders if no id is specified
+app.get('/orders', function( req, res ){
 	connection.query('SELECT * FROM pending_orders', function( err, results ){
 		console.log('error', err);
 		res.send( results )
 	});
-
 });
 
 // gets all orders if no id is specified
-app.get('/completed_orders/:id', function( req, res ){
-
-	var query;
-
-	if ( req.params.id )
-		query = 'SELECT * FROM completed_orders WHERE id=' + connection.escape(req.params.id);
-	else
-		query = 'SELECT * FROM completed_orders';
-
-	connection.query(query, function( err, results ){
+app.get('/completed_orders', function( req, res ){
+	connection.query('SELECT * FROM completed_orders', function( err, results ){
 		console.log('error', err);
 		res.send( results )
 	});
-
 });
 
 // get leaderboard
@@ -153,14 +124,14 @@ app.get('/users', function( req, res ){
 
 // get user info
 app.get('/user/:id', function( req, res ){
-	connection.query('SELECT * FROM users WHERE id=' + connection.escape(req.params.id), function( err, results ){
+	connection.query('SELECT * FROM users WHERE id = ?', req.params.id, function( err, results ){
 		console.log('error', err);
 		res.send( results )
 	});
 });
 
 app.post('/new_user', function( req, res ){
-	connection.query('INSERT INTO users SET ?', req.body, function(err, result) {
+	connection.query('INSERT INTO users VALUES (?)', req.body, function(err, result) {
   		console.log( err, result )
   		res.send( result );
 	});

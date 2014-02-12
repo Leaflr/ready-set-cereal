@@ -6,7 +6,10 @@ define([
 	'use strict';
 
 	return Backbone.Marionette.ItemView.extend({
-		template: dispensorStatusTemp
+		template: dispensorStatusTemp,
+		initialize: function(){
+			console.log(Communicator.socket)
+		}
 
 	});
 });
