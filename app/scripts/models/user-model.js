@@ -46,7 +46,7 @@ define([
 			var supportsLocal = supportsLocalCheck(),
 				user = localStorage.getItem('user'),
 				userEntry;
-
+				console.log(user)
 			if ( supportsLocal === true ){
 				if ( user ) {
 					var self = this;
@@ -77,22 +77,32 @@ define([
 
 					userEntry = {
 						id: 0,
-						rank: 1,
+						rank: '1',
 						'rank_name':'Noob',
 						'active_order_id': 0,
 						name: userFirst + ' ' + userLast
 					}
 
-
 					this.set(userEntry);
-					this.url = '/new_user';
 
-					this.save(userEntry, {
-						success: function(data){
-							localStorage.setItem('user', self.get('insertId'));
-							console.log('saved to local as ', self.get('insertId'))
-						} 
+					$.ajax({
+						url: '/new_user',
+						type: 'POST',
+						data: userEntry
+					}).success(function(data){
+						// localStorage.setItem('user', data);
+
+						console.log(data)
 					});
+
+					// this.save(userEntry, {
+					// 	success: function(data){
+					// 		localStorage.setItem('user', self.get('insertId'));
+					// 		console.log('saved to local as ', self.get('insertId'))
+					// 	}, done: function(data){
+					// 		console.log(data)
+					// 	}
+					// });
 					
 
 				}
