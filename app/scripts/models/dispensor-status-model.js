@@ -6,6 +6,9 @@ define([
 
 	var StatusModel = Backbone.Model.extend({
 		url: '/status',
+		parse: function(response){
+			return response[0];
+		},
 		initialize: function(){
 			this.fetch();
 			console.log(this);
