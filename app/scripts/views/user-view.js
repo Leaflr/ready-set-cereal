@@ -24,11 +24,9 @@ define([
 			navBar = $('#nav');
 			content = $('.content-wrapper');
 			orderButton = $('.order-button');
-			console.log(this.model)
 		},
 
 		navToggle: function(){
-console.log(nav)
 			if ( navBar.hasClass('nav-open') == false ){
 				content.animate({'left': '-85%'}, 200);
 				cerealBowl.css('z-index','1').animate({'left': '-85%'}, 200);

@@ -76,6 +76,7 @@ define([
 					userLast = last[ Math.floor(Math.random() * last.length) ];
 
 					userEntry = {
+						id: 0,
 						rank: 1,
 						'rank_name':'Noob',
 						'active_order_id': 0,
@@ -87,11 +88,11 @@ define([
 					this.url = '/new_user';
 
 					this.save(userEntry, {
-						success:function(data){
+						success: function(data){
 							localStorage.setItem('user', self.get('insertId'));
 							console.log('saved to local as ', self.get('insertId'))
 						} 
-					})
+					});
 					
 
 				}
