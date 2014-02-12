@@ -68,15 +68,15 @@ define([
 				} else {
 					var self = this,
 						userFirst, userLast,
-						first = ['Sleepy','Master','Boss','Cereal','Spoon','Milk','Captain','Breakfast','Chow','Feast','General','Private','Sargeant','Sugar','Crunch','Junior','Senior','Lil\'','Big','Snack','Fancy','Ultimate','Mighty','Lieutenant'],
+						first = ['le','The Last','Señor','Sleepy','Master','Boss','Cereal','Spoon','Milk','Captain','Breakfast','Chow','Feast','General','Private','Sargeant','Sugar','Crunch','Junior','Senior','Lil\'','Big','Snack','Fancy','Ultimate','Mighty','Lieutenant'],
 						last = ['Connoisseur','Gobbler','Muncher','Snacker','Biter','Nibbler','Chewer','Cruncher','Spoon','Cereal','Snap','Crackle','Pop','Explosion','Flavor','Carton','Cup','Bowl','Munch','Crunch','Snack'];
 
-					userFirst = first[Math.floor(Math.random() * first.length)];
-					userLast = last[Math.floor(Math.random() * last.length)];
+					userFirst = first[ Math.floor(Math.random() * first.length) ];
+					userLast = last[ Math.floor(Math.random() * last.length) ];
 
 					userEntry = {
 						rank: 1,
-						'rank-name':'Noob',
+						'rank_name':'Noob',
 						'active_order_id': 0,
 						name: userFirst + ' ' + userLast
 					}
@@ -94,7 +94,6 @@ define([
 					
 					console.log(userEntry)
 
-					
 				}
 
 				
