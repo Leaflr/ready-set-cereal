@@ -1,5 +1,5 @@
 .nav-toggle, #order-button, #dispensor-status {
-	width: 28%;
+	width: 26%;
 	float: left;
 	padding: 7px 4px 0;
 	text-align: center;
@@ -24,28 +24,71 @@
 		}
 
 		&.inactive {
-			border: 3px solid #dedede;
+			border: 3px solid #ACACAC;
 			background-color: white;
-			color: #dedede;
+			color: #ACACAC;
 
 			.icon {
-				color: #dedede;
+				color: #ACACAC;
 			}
 		}
+
+		&.active {
+			color: #545454;
+			border: 3px solid #545454;
+			background-color: white;
+
+			.icon {
+				color: #545454;
+			}
+		}
+
+		&.ready {
+			color: #7DC860;
+			border: 3px solid #7DC860;
+			background-color: white;
+
+			.icon {
+				color: #7DC860;
+			}
+		}
+
+		&.completed {
+			color: rgba(0,0,0,.65);
+			border: 3px solid darken(#7DC860, 5%);
+			background-color: #7DC860;
+
+			.icon {
+				color: white;
+			}
+		}
+
+
 	}
 
 	.icon {
 		color: white;
-		display: inherit;
+		display: block;
 		position: relative;
 		top: -1px;
 		font-size: 24px;
 		line-height: 21px;
+		width: auto;
 	}
 }
 
 #dispensor-status {
-	width: 44%;
+	width: 48%;
+	
+	.icon {
+		position: relative;
+		top: 1px;
+		line-height: 23px;
+	}	
+
+	.milk-temp, .orders {
+    	font-family: 'dinpro-regularregular';
+	}
 }
 
 
@@ -96,6 +139,7 @@
 
 		.rank-info {
 			text-align: center;
+			position: relative;
 
 			.rank-icon {
 				margin: 0 auto;
@@ -108,9 +152,67 @@
 			}
 		}
 
+		.edit-user {
+			position: absolute;
+			z-index: 90;
+			background-color: white;
+			width: 100%;
+			height: 85px;
+			padding: 4px;
+			margin: 0 auto;
+			margin-top: -9px;
+			border-radius: 10px;
+			border: 3px solid #dedede;
+			display: none;
+			
+			input {
+				width: 100%;
+				float: left;
+				border-radius: 6px;
+				border: 3px solid #dedede;
+				height: 34px;
+				padding-left: 6px;
+				margin-bottom: 3px;
+
+				&:focus {
+					border: 3px solid $primary-color;
+					outline: 0;
+				}
+			}
+			button {
+				width: 48%;
+				float: left;
+				height: 34px;
+				padding: 0;
+			}
+			.icon-shuffle {
+				position: relative;
+				top: -2px;
+			}
+			.submit-name {
+				margin-right: 1%;
+				font-size: 13px;
+				float: right;
+			}
+			.shuffle-name {
+				margin-left: 1%;
+				font-size: 24px;
+			}
+		}
+		.user-name {
+    		font-family: 'dinprobold';
+			font-size: 18px;
+
+			.icon-edit, .icon-shuffle {
+				font-size: 24px;
+				margin-left: 4px;
+				color: #dedede;
+				position: relative;
+				top: 3px;
+			}
+		}
 		.rank-name {
     		font-family: 'dinprobold';
-
 		}
 	}
 
@@ -127,7 +229,7 @@
 			.bar-value {
 				position: absolute;
 				background-color: #00ff95;
-				width: 20%;
+				min-width: 6%;
 				height: 16px;
 				border-radius: 8px
 			}

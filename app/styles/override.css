@@ -1,10 +1,10 @@
 .content-wrapper {
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 }
 #nav {
-	/*-webkit-box-shadow: 0px 0px 8px 6px rgba(30,156,206,1);
+	-webkit-box-shadow: 0px 0px 8px 6px rgba(30,156,206,1);
 	-moz-box-shadow: 0px 0px 8px 6px rgba(30,156,206,1);
-	box-shadow: 0px 0px 8px 6px rgba(30,156,206,1);*/
+	box-shadow: 0px 0px 8px 6px rgba(30,156,206,1);
 }
 #nav .nav-content {
 	/*max-width: 400px;*/
@@ -24,9 +24,9 @@
 .nav-content .user-info .rank-info .rank-icon {
 	margin-bottom: 0;
 }
-#nav .nav-toggle {
+/*#nav .nav-toggle {
 	right: 20;
-}
+}*/
 #place-order-form {
-	margin-bottom: 40px;
+	/*margin-bottom: 40px;*/
 }

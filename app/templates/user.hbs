@@ -1,27 +1,32 @@
 <div class="nav-toggle">
-    <button class="nav-button"><span class="icon icon-user"></span>profile</button>
+    <button class="nav-button">
+    	<span class="icon icon-user"></span>
+    	<span class="text">profile</span>
+    </button>
 </div>
 
 <div class="nav-content">
 	<div class="user-info">
 		<div class="rank-info">
 			<div class="rank-icon">
-				<img src="images/ranks/{{ rank-icon }}"/>
+				<img src="images/ranks/{{ rank_icon }}"/>
 			</div>
-			<p class="user-name">{{ name }}</p>
-			<p class="rank-name">{{ rank-name }}</p>
-			<p class="standing">Ranked {{ rank }} / 6</p>
+			<div class="edit-user">
+				<input type="text" value="{{ name }}">
+				<button class="shuffle-name"><span class="icon-shuffle"></span></button>
+				<button class="submit-name">SAVE</button>
+			</div>
+			<p class="user-name"><span>{{ name }}</span> <span class="icon-edit needsclick"></span></p>
+			<p class="rank-name">{{ rank_name }}</p>
+			<p class="standing">Level {{ rank }} / 6</p>
+			<p class="bowl-ordered">{{ bowls }} Bowls Ordered</p>
 		</div>
 	</div>
 	<div class="experience">
 		<div class="bar">
 			<div class="bar-value"></div>
 		</div>
-		<span class="next-level">Lvl {{ next-rank }}</span>
+		<span class="next-level">Lvl {{ next_rank }}</span>
 		<span class="level">Lvl {{ rank }}</span>
-		
-	</div>
-	<div class="status">
-		
 	</div>
 </div>

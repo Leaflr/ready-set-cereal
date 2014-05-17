@@ -33,7 +33,18 @@ define([
 
 	var UserModel = Backbone.Model.extend({
 		url: '/user',
+		parse: function( response ){
+			return response[0];
+		},
 		initialize: function(){
+			var self = this;
+
+
+			Communicator.events.on('orderCancelled', function(){
+				self.set('hasOrder', false);
+				self.set('active_order_id', 0);
+			});
+
 			function supportsLocalCheck() {
 			  try {
 			    return 'localStorage' in window && window['localStorage'] !== null;
@@ -41,7 +52,8 @@ define([
 			    return false;
 			  }
 			}
-					// delete localStorage['user'];
+			
+			delete localStorage['user'];
 
 			var supportsLocal = supportsLocalCheck(),
 				user = localStorage.getItem('user'),
@@ -60,62 +72,55 @@ define([
 					// });
 
 					this.url = '/user/' + user;
-
 					this.fetch().success(function(data){
-						self.set('next-rank', self.get('rank') + 1);
-						console.log(self)
+						if ( self.get('rank') >= 6 )
+							self.set('rank', 6);
+
+						self.set('next_rank', self.get('rank') + 1);
+						self.set('rank_icon', ranks[self.get('rank')].icon );
+						self.set('rank_name', ranks[self.get('rank')].name );
+
+						Communicator.events.trigger('userLoaded');
 					});
 
 				} else {
-					var self = this,
-						userFirst, userLast,
-						first = ['Silly','le','The Last','Señor','Sleepy','Master','Boss','Cereal','Spoon','Milk','Captain','Breakfast','Chow','Feast','General','Private','Sargeant','Sugar','Crunch','Junior','Senior','Lil\'','Big','Snack','Fancy','Ultimate','Mighty','Lieutenant'],
-						last = ['Connoisseur','Gobbler','Muncher','Snacker','Biter','Nibbler','Chewer','Cruncher','Spoon','Cereal','Snap','Crackle','Pop','Explosion','Flavor','Carton','Cup','Bowl','Munch','Crunch','Snack'];
-
-					userFirst = first[ Math.floor(Math.random() * first.length) ];
-					userLast = last[ Math.floor(Math.random() * last.length) ];
-
+					var self = this;
+						
 					userEntry = {
-						id: 0,
-						rank: parseInt(1),
+						user_id: 0,
+						rank: 1,
 						rank_name: "Noob",
-						active_order_id: parseInt(0),
-						name: userFirst + ' ' + userLast
+						active_order_id: 0,
+						bowls: 0,
+						name: self.generateName()
 					}
 
-					// this.set(userEntry);
-					console.log(userEntry)
 					$.ajax({
 						url: '/new_user',
 						type: 'POST',
-						data: userEntry,
-						error: function(d){
-							console.log(d)
-						}
-					}).always(function(data){
-						// localStorage.setItem('user', data);
-
-						console.log(data)
+						data: userEntry
+					}).success(function(data){
+						localStorage.setItem('user', data.result.insertId);
+						self.set(userEntry);
+						self.set('bowls', 0);
+						self.set('next_rank', self.get('rank') + 1);
+						self.set('rank_icon', ranks[self.get('rank')].icon );
+						self.set('rank_name', ranks[self.get('rank')].name );
+						
+						Communicator.events.trigger('userLoaded');
 					});
-					// this.url = '/new_user'
-					// this.save(userEntry, {
-					// 	success: function(data){
-					// 		// localStorage.setItem('user', self.get('insertId'));
-					// 		console.log('saved to local as ', self.get('insertId'))
-					// 	}, done: function(data){
-					// 		console.log(data)
-					// 	}
-					// });
-
 				}
-
-				
-
-			} else {
-				console.log('nooope');
 			}
-
+		},
+		generateName: function(){
+			var userFirst, userLast,
+				first = ['The First','Messy','Sensei','Silly','le','The Last','Señor','Sleepy','Master','Boss','Cereal','Spoon','Milk','Captain','Breakfast','Chow','Feast','General','Private','Sargeant','Sugar','Crunch','Junior','Senior','Lil\'','Big','Snack','Fancy','Ultimate','Mighty','Lieutenant'],
+				last = ['Connoisseur','Gobbler','Muncher','Snacker','Biter','Nibbler','Chewer','Cruncher','Spoon','Cereal','Snap','Crackle','Pop','Explosion','Flavor','Carton','Cup','Bowl','Munch','Crunch','Snack'];
 			
+			userFirst = first[ Math.floor(Math.random() * first.length) ];
+			userLast = last[ Math.floor(Math.random() * last.length) ];	
+
+			return userFirst + ' ' + userLast;		
 		}
 	});
 

@@ -1,10 +1,11 @@
 define([
 	'backbone',
 	'communicator',
+	'models/user-model',
 	'hbs!/templates/place-order',
 	'jquery-ui',
 	'jquery-ui-touch-punch'
-], function( Backbone, Communicator, placeOrderTemp ){
+], function( Backbone, Communicator, userModel, placeOrderTemp ){
 	'use strict';
 
 	var data = { 
@@ -19,24 +20,43 @@ define([
 
 	var nutritionalInfo = {
 		milk: {
-			calories: 120,
-			fat: 9
+			calories: 190,
+			total_fat: 5,
+			sat_fat: 3,
+			protein: 8,
+			sugar: 12,
+			cholesterol: 20 //mg
 		},
+		// crunch berries
 		c1 : {
-			calories: 100,
-			fiber: 2,
-			fat: 1
+			calories: 104,
+			protein: 1.16, //g
+			total_fat: 1.47, //g
+			sat_fat: 0.37, //g
+			potassium: 53.65, //mg
+			sodium: 181.74, //mg
+			sugar: 11.58 //g
 		},
+		//trix
 		c2 : {
-			calories: 200,
-			fiber: 4,
-			fat: 2
+			calories: 120,
+			protein: 1,
+			total_fat: 1.5,
+			sat_fat: 0,
+			potassium: 35,
+			sodium: 180,
+			sugar: 10
 		},
+		//fruit loops
 		c3 : {
-			calories: 50,
-			fiber: 5,
-			fat: 3
-		}
+			calories: 110,
+			protein: 1,
+			total_fat: 1,
+			sat_fat: 0.5,
+			potassium: 35,
+			sodium: 135,
+			sugar: 12
+		},
 	}
 	
 	return Backbone.Marionette.ItemView.extend({
@@ -56,13 +76,23 @@ define([
 		},
 
 		onRender: function(){
+			var self = this;
+
 			this.initSliders();
+
+			this.$el.find('.sliders-wrapper').hide();
+
+			this.$el.find('.maker-message button').click(function(){
+				$(this).parent().hide(100);
+				self.$el.find('.sliders-wrapper').fadeIn(100);
+			});
 		},
 
 		initSliders: function(){
 			this.initMilkSlider();
 			this.initCerealSliders();
-
+			// console.log(this.$el.find('.ui-slider-handle:first-child'))
+			this.$el.find('.slider a:first-child').remove();
 			this.$el.find('.ui-slider-handle').append('<img src="images/spoon.svg">');
 		},
 
@@ -85,17 +115,25 @@ define([
 				},
 				start: function( event, ui ){
 					indicator = self.ui.milk.find('.amount-indicator');
-					handle = self.ui.milk.find('.ui-slider-handle img');
+					handle = self.ui.milk.find('.ui-slider-handle');
 					indicatorWidth( indicator, handle.offset().left )
 				},
 				slide: function( event, ui ){
 					data.milk = parseFloat(ui.value);
 
-					indicatorWidth( indicator, handle.offset().left + 17 );
+					if ( ui.value == 14 ){
+						handle.css('margin-left','-30px')
+					} else {
+						handle.css('margin-left','-6px')
+					}
 
 					var top = -(ui.value * 8),
 						width = 7.25 * ui.value,
 						sizeAdjust = 120;
+
+					if ( ui.value == 0 ){
+						top = -5;
+					}
 
 					milk.css({
 						'margin-top': 106 + top + 'px',
@@ -133,7 +171,7 @@ define([
 			function amountCheck(){
 				var amount = data.c1 + data.c2 + data.c3;
 
-				if ( amount == 2 ){
+				if ( amount > 1 ){
 					return false;
 				} else {
 					return true;
@@ -147,38 +185,44 @@ define([
 				min: 0,
 				max: 2,
 				create: function( event, ui ){
-				
+					$(this).attr('data-value', 0)
 				},
 				start: function( event, ui ){
 					value = $(this).find('.amount');
 					cereal = $(this).attr('data-cereal');
 					indicator = $(this).find('.amount-indicator');
 					handle = $(this).find('.ui-slider-handle');
-					indicatorWidth( indicator, handle.offset().left );
-					
-					if (disabled == true){
-						console.log('disabled')
-					}
+										
 				},
 				slide: function( event, ui ){
 					data[cereal] = parseFloat(ui.value);
+
 					var currentAmount = data.c1 + data.c2 + data.c3,
 						c1Colors = ['#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
-						c2Colors = ['#f9eb2a', '#ffcd1e','#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
-						c3Colors = ['#00b3e3'],
+						c2Colors = ['#f9eb2a','#f9eb2a','#f9eb2a','#f9eb2a','#ffcd1e','#ffcd1e','#fc3037', '#f5903d', '#2F8E24', '#313B61', '#B12B32','#08A6C9'],
+						c3Colors = ['#fc3037', '#f5903d', '#7a4562', '#b3eb78', '#58ccbb'],
 						showCereal,
 						hideCereal;
-					indicatorWidth( indicator, handle.offset().left + 17 );
 
-					
+					if ( amountCheck() === false ){
+						if ( ui.value - $(this).attr('data-value') < 0 ){
 
-					// if ( amountCheck() === false ){
-					// 	handle.removeAttr('style')
-					// 	handle.css('left','0')
-					// } else {
-					// 	$(this).css('pointer-events','none')
+						} else {
+							data[cereal] = ui.value - 1;
+							return false;
+						}
+					} 
 
-					// }
+					$(this).attr('data-value', ui.value)
+
+					if ( ui.value == 2 ){
+						handle.css('margin-left','-30px')
+					} else if ( ui.value == 1){
+						handle.css('margin-left','-20px')
+					} else {
+						handle.css('margin-left','-6px')
+					}
+
 					if ( ui.value == 0 )
 						cerealAmount = 'None';
 					else if ( ui.value == 1 )
@@ -194,6 +238,8 @@ define([
 						colorSet = c3Colors;
 					}
 
+					console.log(currentAmount, ui.value)
+
 					if ( currentAmount == 0 && ui.value == 0){
 						hideCereal = cereal1;
 					} else if ( currentAmount == 0 && ui.value == 1){
@@ -202,7 +248,6 @@ define([
 					} else if ( currentAmount == 1 && ui.value == 1){
 						showCereal = cereal1;
 						hideCereal = cereal2;
-						disabled = true;
 					} else if ( currentAmount == 1 && ui.value == 0){
 						showCereal = cereal1;
 						hideCereal = cereal2;
@@ -221,21 +266,32 @@ define([
 								}
 							}
 						}
+
 					} else if ( currentAmount == 2 && ui.value == 1) {
-						showCereal = cereal2;
-						
+						showCereal = cereal2;						
 					} else if ( currentAmount == 2 && ui.value == 2){
 						showCereal = cereal2;
 					}
 
-						
-						if ( hideCereal )
+						if ( hideCereal ){
 							hideCereal.closest('svg').hide();
+
+
+						}
+							
 						if ( showCereal ){
 							showCereal.closest('svg').show();
 
 							for ( var i = 0; i < showCereal.length; i++ ){
 								showCereal[i].setAttribute('fill', colorSet[Math.floor(Math.random() * colorSet.length)])
+							}
+
+							if ( !hideCereal ){
+								cereal1.closest('svg').show();
+
+								for ( var i = 0; i < cereal1.length; i++ ){
+									cereal1[i].setAttribute('fill', colorSet[Math.floor(Math.random() * colorSet.length)])
+								}
 							}
 						}
 					
@@ -245,12 +301,21 @@ define([
 				stop: function( event, ui ){
 					var currentAmount = data.c1 + data.c2 + data.c3;
 
-					if ( currentAmount == 1 && ui.value == 1){
+					if ( currentAmount == 2 ){
 						disabled = true;
-					}
+						$('.slider.cereal').each(function(){
+							var val = $(this).attr('data-value');
+							
+							if ( ui.value == 2 ){
+								console.log(val)
+								if ( val == 0 ){
+									$(this).addClass('disabled-slider');
+								}
+							}
+						})
+					} else {
 
-					indicatorWidth( indicator, handle.offset().left )
-					
+					}				
 				}
 			});
 		},
@@ -266,15 +331,22 @@ define([
 			}
 
 			this.$el.hide();
+			$('#leaderboard').show();
 
+				// userModel.set('hasOrder', true);
+
+				// userModel.set('active_order_id', 12);
+				// Communicator.events.trigger('orderPlaced', 12 );
 			$.ajax({
 				url: '/new_order',
 				type: 'POST',
 				data: data
 			}).success(function(data){
-				console.log(data)
+				userModel.set('hasOrder', true);
+				userModel.set('active_order_id', data.insertId );
+				Communicator.events.trigger('orderPlaced', data.insertId );
+				console.log(data.insertId, ' id order recieved')
 			});
-
 
 		}
 

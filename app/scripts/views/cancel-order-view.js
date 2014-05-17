@@ -6,7 +6,18 @@ define([
 	'use strict';
 
 	return Backbone.Marionette.ItemView.extend({
-		template: cancelOrderTemp
+		template: cancelOrderTemp,
+		events: {
+			'click .yes':'cancelOrder',
+			'click .no':'dontCancel'
+		},
+		cancelOrder: function(){
+			Communicator.events.trigger('orderCancelled');
+			this.$el.remove();
+		},
+		dontCancel: function(){
+			this.$el.remove();
+		}
 
 	});
 });

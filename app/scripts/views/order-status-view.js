@@ -13,10 +13,10 @@ define([
 	return Backbone.Marionette.Layout.extend({
 		regions: {
 			placeOrderForm: '#place-order-form',
-			modifyOrderForm: '#modify-order-form'
+			cancelOrderForm: '#modify-order-form'
 		},
 		initialize: function(){
-			var activeOrder = userModel.get('activeOrder'),
+			var activeOrder = userModel.get('active_order_id'),
 				self = this;
 
 			Communicator.events.on('placeOrder', function(){
@@ -32,7 +32,7 @@ define([
 			});
 
 			// if user has an active order show views
-			if ( activeOrder ){
+			if ( activeOrder == 0 ){
 				this.template = orderStatusActiveTemp
 			} else {
 				this.template = orderStatusInactiveTemp
@@ -40,6 +40,7 @@ define([
 		},
 		placeOrder: function(){
 			this.placeOrderForm.show( new placeOrderView() );
+			$('#leaderboard').hide();
 		},
 		cancelOrder: function(){
 			this.cancelOrderForm.show( new cancelOrderView() );

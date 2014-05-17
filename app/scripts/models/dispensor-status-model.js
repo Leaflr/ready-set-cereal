@@ -7,15 +7,16 @@ define([
 	var StatusModel = Backbone.Model.extend({
 		url: '/status',
 		parse: function(response){
-			return response[0];
+			var orders = response.orders.length;
+			response.status[0].orders = orders;
+			response.status[0]['milk_temp'] = parseFloat(response.status[0]['milk_temp']).toFixed(1);
+			return response.status[0];
 		},
 		initialize: function(){
+			var self = this;
 			this.fetch();
-			console.log(this);
 		}
 	});
 
-	var statusModel = new StatusModel();
-
-	return statusModel;
+	return StatusModel;
 });

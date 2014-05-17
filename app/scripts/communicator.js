@@ -11,7 +11,8 @@ function( Backbone ) {
 			// create a pub sub
 			this.events = new Backbone.Wreqr.EventAggregator();
 
-        	this.socket = io.connect('http://localhost:9005');
+        	this.socket = io.connect('http://readysetcereal.com:9005');
+        	// this.socket = io.connect('http://localhost:9005');
 
 			//create a req/res
 			this.reqres = new Backbone.Wreqr.RequestResponse();
