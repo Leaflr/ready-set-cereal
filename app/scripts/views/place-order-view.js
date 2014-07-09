@@ -80,12 +80,12 @@ define([
 
 			this.initSliders();
 
-			this.$el.find('.sliders-wrapper').hide();
+			// this.$el.find('.sliders-wrapper').hide();
 
-			this.$el.find('.maker-message button').click(function(){
-				$(this).parent().hide(100);
-				self.$el.find('.sliders-wrapper').fadeIn(100);
-			});
+			// this.$el.find('.maker-message button').click(function(){
+			// 	$(this).parent().hide(100);
+			// 	self.$el.find('.sliders-wrapper').fadeIn(100);
+			// });
 		},
 
 		initSliders: function(){

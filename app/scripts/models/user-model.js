@@ -53,7 +53,7 @@ define([
 			  }
 			}
 			
-			delete localStorage['user'];
+			// delete localStorage['user'];
 
 			var supportsLocal = supportsLocalCheck(),
 				user = localStorage.getItem('user'),
