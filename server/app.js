@@ -5,12 +5,16 @@ var http = require('http');
 var path = require('path');
 var async = require('async');
 var hbs = require('express-hbs');
+var dotenv = require('dotenv');
 
 var socketIO = require('socket.io');
 
 var mysql = require('mysql');
 
-var connection = mysql.createConnection('mysql://rsc:g00dbyeworld!@leaflr.com/rsc?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
+var mysqluser = process.env.MYSQLUSER;
+var mysqlpass = process.env.MYSQLPASS;
+
+var connection = mysql.createConnection('mysql://'+mysqluser+':'+mysqlpass+'@leaflr.com/rsc?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
 // var connection = mysql.createConnection('mysql://root:root@localhost/root?debug=true&charset=BIG5_CHINESE_CI&timezone=-0700');
 // var connection = mysql.createConnection({
 //   host     : 'localhost',

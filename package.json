@@ -7,7 +7,8 @@
     "async": "~0.2.8",
     "socket.io": "~0.9.14",
     "express-hbs": "~0.2.0",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "dotenv": "0.5.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
